@@ -6,14 +6,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LydecResolver | Home</title>
-<link rel="stylesheet" href="{{mix('css/app.css')}}">
+<link rel="stylesheet" href="{{asset('css/app.css')}}">
+<link rel="shortcut icon" href="{{asset('img/images/favicon.png')}}"/>
 <script nonce="662dddaa-5742-4c46-8e42-65b8c6ab7aa1">(function(w,d){!function(bv,bw,bx,by){bv[bx]=bv[bx]||{};bv[bx].executed=[];bv.zaraz={deferred:[],listeners:[]};bv.zaraz.q=[];bv.zaraz._f=function(bz){return function(){var bA=Array.prototype.slice.call(arguments);bv.zaraz.q.push({m:bz,a:bA})}};for(const bB of["track","set","debug"])bv.zaraz[bB]=bv.zaraz._f(bB);bv.zaraz.init=()=>{var bC=bw.getElementsByTagName(by)[0],bD=bw.createElement(by),bE=bw.getElementsByTagName("title")[0];bE&&(bv[bx].t=bw.getElementsByTagName("title")[0].text);bv[bx].x=Math.random();bv[bx].w=bv.screen.width;bv[bx].h=bv.screen.height;bv[bx].j=bv.innerHeight;bv[bx].e=bv.innerWidth;bv[bx].l=bv.location.href;bv[bx].r=bw.referrer;bv[bx].k=bv.screen.colorDepth;bv[bx].n=bw.characterSet;bv[bx].o=(new Date).getTimezoneOffset();if(bv.dataLayer)for(const bI of Object.entries(Object.entries(dataLayer).reduce(((bJ,bK)=>({...bJ[1],...bK[1]})))))zaraz.set(bI[0],bI[1],{scope:"page"});bv[bx].q=[];for(;bv.zaraz.q.length;){const bL=bv.zaraz.q.shift();bv[bx].q.push(bL)}bD.defer=!0;for(const bM of[localStorage,sessionStorage])Object.keys(bM||{}).filter((bO=>bO.startsWith("_zaraz_"))).forEach((bN=>{try{bv[bx]["z_"+bN.slice(7)]=JSON.parse(bM.getItem(bN))}catch{bv[bx]["z_"+bN.slice(7)]=bM.getItem(bN)}}));bD.referrerPolicy="origin";bD.src="/cdn-cgi/zaraz/s.js?z="+btoa(encodeURIComponent(JSON.stringify(bv[bx])));bC.parentNode.insertBefore(bD,bC)};["complete","interactive"].includes(bw.readyState)?zaraz.init():bv.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,"zarazData","script");})(window,document);</script></head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+<nav class="main-header navbar navbar-expand navbar-white" style="background-color: #1A202C;">
 
-<ul class="navbar-nav">
+<ul class="navbar-nav nav-pills nav-fill">
 <li class="nav-item">
 <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
 </li>
@@ -25,7 +26,7 @@
 </li>
 </ul>
 
-<ul class="navbar-nav ml-auto">
+<ul class="navbar-nav ml-auto nav-pills nav-fill">
 
 <li class="nav-item">
 <a class="nav-link" data-widget="navbar-search" href="#" role="button">
@@ -34,7 +35,7 @@
 <div class="navbar-search-block">
 <form class="form-inline">
 <div class="input-group input-group-sm">
-<input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+<input class="form-control form-control-navbar  offset-4 col-4" type="search" placeholder="Search" aria-label="Search">
 <div class="input-group-append">
 <button class="btn btn-navbar" type="submit">
 <i class="fas fa-search"></i>
@@ -71,17 +72,17 @@
 </li>
 <li class="nav-item">
 <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-<i class="fas fa-user"></i>
+<i class="fas fa-user "></i>
 </a>
 </li>
 </ul>
 </nav>
 
 
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1A202C;">
 
 <a href="index3.html" class="brand-link">
-<img src="{{asset('img/images/logo_transparent.png')}}" alt="LydecResolver Logo" class="brand-image img-circle elevation-5" style="opacity: .8">
+<img src="{{asset('img/images/logo_transparent.png')}}" alt="LydecResolver Logo" class="brand-image border img-circle elevation-5" style="opacity: .8">
 <span class="brand-text font-weight-bold fs-5">LydecResolver</span>
 </a>
 
@@ -246,7 +247,7 @@ Anything you want
 </footer>
 </div>
 
-<script src="{{mix('/js/app.js')}}"></script>
+<script src="{{asset('/js/app.js')}}"></script>
 
 </body>
 </html>
