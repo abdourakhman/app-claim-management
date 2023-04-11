@@ -17,14 +17,7 @@ class GestionnaireFactory extends Factory
     public function definition()
     {
         return [
-            'nom' => $this->faker->lastName,
-            'prenom' => $this->faker->firstName,
-            'photo_url' => $this->faker->imageUrl(),
-            'email' => $this->faker->unique()->safeEmail,
-            'sexe' => array_rand(["F","M",1]),
-            'date_naissance' => $this->faker->unique()->date($format = 'Y-m-d', $max = '1999-06-09'),
-            'telephone' => $this->faker->e164PhoneNumber,
-            'adresse' => $this->faker->address,
+            'user_id' => rand(1,165)
         ];
     }
 }

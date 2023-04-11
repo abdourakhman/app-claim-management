@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Fiche;
 use App\Models\Client;
 use App\Models\Technicien;
@@ -24,6 +25,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(TypeTechnicienSeeder::class);
+        User::factory(165)->create();
         Client::factory(100)->create();
         Gestionnaire::factory(15)->create();
         Technicien::factory(50)->create();
