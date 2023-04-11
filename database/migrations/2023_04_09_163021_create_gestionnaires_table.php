@@ -16,7 +16,7 @@ class CreateGestionnairesTable extends Migration
         Schema::create('gestionnaires', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId(user_id)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
         });
     }
 

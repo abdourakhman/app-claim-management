@@ -16,7 +16,7 @@ class CreateTechniciensTable extends Migration
         Schema::create('techniciens', function (Blueprint $table) {
             $table->id();
             $table->boolean("disponibilite")->default(true);
-            $table->foreignId(user_id)->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
         Schema::enableForeignKeyConstraints();
