@@ -10,9 +10,7 @@
 
     <title>{{ config('app.name', 'LydecResolver') }}</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
+   
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -24,7 +22,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md shadow-sm"style="background-color: #1A202C; border-bottom:1px solid gray;">
             <div class="container">
-                <a class="navbar-brand text-light mr-5 ml-0" href="{{ url('/') }}">
+                <a class="navbar-brand text-light" href="{{ url('/') }}">
                     <img class="img-circle" src="{{asset('img/images/favicon.png')}}" alt="logo">
                     <span class="brand-text">{{ config('app.name', 'LydecResolver') }}</span>
                 </a>
@@ -32,24 +30,25 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav ms-auto">
 
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav offset-lg-10 offset-md-9">
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item ml-5">
+                                <li class="nav-item px-3">
                                     <a class="navbar-brand text-light text-right" href="{{ route('login') }}">
-                                        <span class="brand-text">{{ __('Login') }}</span>
+                                        {{-- TODO soulinger le span suivant la route courante --}}
+                                        <span class="brand-text" style="text-decoration:underline;">{{ __('Login') }}</span>
                                     </a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
-                                <li class="nav-item ml-5">
+                                <li class="nav-item">
                                     <a class="navbar-brand text-light" href="{{ route('register') }}">
                                         <span class="brand-text"> {{ __('Register') }}</span>
                                     </a>
@@ -88,4 +87,6 @@
         </main>
     </div>
 </body>
+ <!-- Scripts -->
+ <script src="{{ asset('js/app.js') }}" defer></script>
 </html>
