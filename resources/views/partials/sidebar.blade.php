@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #1A202C;">
 
     <a href="/" class="brand-link">
-        <img src="{{asset('img/images/logo_transparent.png')}}" alt="LydecResolver Logo" class="brand-image border img-circle elevation-5" style="opacity: .8">
+        <img src="{{asset('img/images/logo_transparent.png')}}" alt="LydecResolver Logo" class="brand-image border img-circle elevation-5" style="opacity: .8; max-width:100px;">
         <span class="brand-text font-weight-bold fs-5">LydecResolver</span>
     </a>
 
@@ -10,7 +10,7 @@
 
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
             </div>
             <div class="info">
                 <a href="#" class="d-block">Utilisateur XY</a>
@@ -69,11 +69,39 @@
 </aside>
 
 {{-- SIDEBAR RIGHT LIE AU CLIC SUR L'ICONE USER --}}
-<aside class="control-sidebar control-sidebar-dark">
-    <div class="p-3">
-        <h5>Title</h5>
-        <p>Sidebar content</p>
+<aside class="control-sidebar " style="background-color: #1A202C; max-heigth:60%;">
+    <!-- Control sidebar content goes here -->
+<div style="background-color: #1A202C;">
+    <div class="card-body  box-profile" style="background-color: #1A202C;">
+    <div class="text-center">
+        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/images/profil.png') }}" alt="User profile picture">
     </div>
+
+    <h3 class="profile-username text-center text-primary truncable">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h3>
+
+    <p class="text-muted text-center">{{auth()->user()->profil}}</p>
+
+    <ul class="list-group my-5 mb-3" style="background-color: #1A202C;">
+        <li class="list-group-item bg-light">
+        <a href="#" class="d-flex align-items-center text-primary "><i class="fa fa-lock pr-2"></i><b >Mot de passe</b> </a>
+        </li>
+        <li class="list-group-item bg-light">
+        <a href="#" class="d-flex align-items-center text-primary"><i class="fa fa-user pr-2"></i><b >Mon profile</b> </a>
+        </li>
+    </ul>
+
+    <a class="btn btn-danger  btn-block" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+        Déconnexion
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        @csrf
+    </form>
+    </div>
+    <!-- /.card-body -->
+</div>
 </aside>
         
 {{-- END SIDEBAR RIGHT LIE AU CLIC SUR L'ICONE USER --}}

@@ -1,2 +1,15 @@
 @import "~admin-lte/dist/css/adminlte.css";
 @import "~admin-lte/plugins/fontawesome-free/css/all.min.css";
+
+.control-sidebar{
+    bottom: calc(35rem + 1px);
+    right: -250px;
+    width: 250px;
+    transition: right 0.3s ease-in-out, display 0.3s ease-in-out;
+}
+
+.truncable{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
