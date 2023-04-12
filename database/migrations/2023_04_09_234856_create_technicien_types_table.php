@@ -14,7 +14,6 @@ class CreateTechnicienTypesTable extends Migration
     public function up()
     {
         Schema::create('technicien_types', function (Blueprint $table) {
-            $table->id();
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
             $table->foreignId('type_id')->onDelete("cascacde")->onUpdate("cascade");
             $table->timestamps();

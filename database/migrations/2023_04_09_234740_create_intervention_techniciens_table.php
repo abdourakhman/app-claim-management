@@ -13,8 +13,7 @@ class CreateInterventionTechniciensTable extends Migration
      */
     public function up()
     {
-        Schema::create('intervention_techniciens', function (Blueprint $table) {
-            $table->id();
+        Schema::create('intervention_techniciens', function (Blueprint $table){ 
             $table->date("date");
             $table->timestamps();
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
