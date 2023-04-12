@@ -8,7 +8,7 @@
                 <div class="card-header text-center text-gray font-weight-bold">{{ __('Inscription') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-3">
                             <input type="text" placeholder="prenom" class="form-control " name="prenom" value="{{ old('prenom') }}" required autocomplete="prenom" autofocus>
@@ -65,28 +65,20 @@
                             </div>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-append">
+                        <div class="input-group mb-3 w-100">
+                            <input type="file" style="width:94%;" class="form-control-file px-0 border  @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" autofocus>
+                            <div class="input-group-append" style="width:6%;">
                                 <div class="input-group-text">
                                     <span class="fas fa-id-card"></span>
                                 </div>
                             </div>
-                            <div class="custom-file">
-                              <input type="file" class="custom-file-input" name="photo" value="{{ old('photo') }}" required autocomplete="photo" autofocus>
-                              <label class="custom-file-label" for="inputGroupFile01">Ajouter une photo</label>
-                              @error('photo')
-                              <span class="invalid-feedback" role="alert">
-                                  <strong>{{ $message }}</strong>
-                              </span>
-                              @enderror
-                            </div>
-                          </div>
-
-                       
-
-                        <div class=" col-4 input-group mb-3" >
-                          
+                            @error('photo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                         </div>
+
 
                         <div class=" input-group mb-3">
                             <div class="mr-5">
