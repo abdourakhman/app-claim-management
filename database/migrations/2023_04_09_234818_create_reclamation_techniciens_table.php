@@ -16,7 +16,6 @@ class CreateReclamationTechniciensTable extends Migration
         Schema::create('reclamation_techniciens', function (Blueprint $table) {
             $table->foreignId('reclamation_id')->onDelete("cascacde")->onUpdate("cascade");
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
-            $table->timestamps();
             
         });
         Schema::enableForeignKeyConstraints();
