@@ -20,7 +20,7 @@ class UserFactory extends Factory
             'nom' => $this->faker->lastName,
             'prenom' => $this->faker->firstName,
             'sexe' => array_rand(['H','F'],1),
-            'photo_url' => $this->faker->imageUrl(),
+            'photo_url' => $this->faker->unique()->imageUrl(),
             'date_naissance' => $this->faker->unique()->date($format='Y-m-d', $max='1999-01-01'),
             'telephone' => $this->faker->unique()->e164PhoneNumber,
             'adresse' => $this->faker->unique()->address,

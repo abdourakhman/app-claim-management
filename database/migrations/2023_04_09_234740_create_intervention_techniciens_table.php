@@ -15,6 +15,7 @@ class CreateInterventionTechniciensTable extends Migration
     {
         Schema::create('intervention_techniciens', function (Blueprint $table){ 
             $table->date("date");
+            $table->timestamps();
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
             $table->foreignId('intervention_id')->onDelete("cascacde")->onUpdate("cascade");
         });
