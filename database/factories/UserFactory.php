@@ -15,11 +15,12 @@ class UserFactory extends Factory
     public function definition()
     {
         $profils=array('client','gestionnaire','technicien');
+        $sexe=array('H','F');
         return [
             'email' => $this->faker->unique()->email,
             'nom' => $this->faker->lastName,
             'prenom' => $this->faker->firstName,
-            'sexe' => array_rand(['H','F'],1),
+            'sexe' => $sexe[rand(0,1)],
             'photo_url' => $this->faker->unique()->imageUrl(),
             'date_naissance' => $this->faker->unique()->date($format='Y-m-d', $max='1999-01-01'),
             'telephone' => $this->faker->unique()->e164PhoneNumber,

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string("nom");
             $table->string("prenom");
             $table->char("sexe");
-            $table->string("photo_url")->unique()->default("https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fphotos-vecteurs-libre%2Flogo-profil&psig=AOvVaw2pzWZ-OMK5TFIY2ORxvIEy&ust=1681173173580000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPi2-6OInv4CFQAAAAAdAAAAABAJ");
+            $table->string("photo_url")->default("https://www.google.com/url?sa=i&url=https%3A%2F%2Ffr.freepik.com%2Fphotos-vecteurs-libre%2Flogo-profil&psig=AOvVaw2pzWZ-OMK5TFIY2ORxvIEy&ust=1681173173580000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCPi2-6OInv4CFQAAAAAdAAAAABAJ");
             $table->date("date_naissance")->unique();
             $table->string("telephone")->unique();
             $table->string("adresse")->unique();

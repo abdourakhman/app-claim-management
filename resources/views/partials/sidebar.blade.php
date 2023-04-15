@@ -14,7 +14,7 @@
                     <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
                 </div>
                 <div class="info">
-                    <a class="d-block profile-username text-center text-primary truncable text-light" href="#">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</a>
+                    <a class="d-block profile-username text-center text-primary truncable text-light" href="#">{{ Auth::user()->prenom }}</a>
                 </div>
             </div>
 
