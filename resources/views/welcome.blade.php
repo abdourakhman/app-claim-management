@@ -1,6 +1,4 @@
 @extends('layouts.master')
-@include('partials.navbar')
-@include('partials.sidebar')
 @section('content')
 <div class="content-wrapper">
     {{-- ENTETE CONTENU --}}

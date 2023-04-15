@@ -13,13 +13,11 @@
         <div class="wrapper">
 
             {{-- NAVBAR --}}
-     
-
+            @yield('navbar')
             {{-- END NAVBAR --}}
 
             {{-- START Sidebar --}}
-
-          
+            @yield('sidebar')
             {{-- END Sidebar  --}}
            
             {{-- CONTENT  --}}
@@ -27,7 +25,6 @@
             {{-- END CONTENU --}}
 
             {{-- SIDEBAR RIGHT LIE AU CLIC SUR L'ICONE USER --}}
-            
             {{-- END SIDEBAR RIGHT LIE AU CLIC SUR L'ICONE USER --}}
 
             <footer class="main-footer">
