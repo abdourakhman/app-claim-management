@@ -83,7 +83,7 @@
                         <div class=" input-group mb-3">
                             <div class="mr-5">
                                 <label for="homme" class="px-2">Homme</label>
-                                <input type="radio" name="sexe" class="px-2" id="homme" value="H">
+                                <input type="radio" name="sexe" class="px-2" id="homme" value="H" checked>
                                 <label for="femme" class="px-2 col-form-label">Femme</label>
                                 <input class="px-2"  type="radio" name="sexe" id="femme" value="F">
                             </div>

@@ -12,7 +12,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     @if (Storage::disk('public')->exists(Auth::user()->photo_url))
-                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">    
+                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:80px;">    
                     @else
                         <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
                     @endif
@@ -34,6 +34,8 @@
                         </a>
                     </li>
                     {{-- Start gestion utilisateurs --}}
+                    @can('admin')
+                        
                     <li class="nav-item menu-open mt-2">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cogs"></i>
@@ -68,8 +70,11 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
                     {{-- End gestion utilisateur --}}
                     {{-- Start gestion reclamation --}}
+                    @can('gestionnaire')
+                        
                     <li class="nav-item menu-open mt-2">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-exclamation-circle"></i>
@@ -109,7 +114,7 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-address-book"></i>
                             <p>
-                               Gestion Techniciens <i class="right fas fa-angle-left"></i>
+                                Gestion Techniciens <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
@@ -134,7 +139,10 @@
                         </ul>
                     </li>
                     {{-- End gestion techniciens --}}
-                    {{-- Start gestion techniciens --}}
+                    @endcan
+                    {{-- Start gestion interventions --}}
+                    @can('technicien')
+                        
                     <li class="nav-item menu-open mt-2">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tasks"></i>
@@ -163,6 +171,8 @@
                             </li>
                         </ul>
                     </li>
+                    @endcan
+                    {{-- END GESTION Interventions --}}
                     <li class="nav-item menu-open mt-2">
                         <a class="nav-link bg-danger" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
@@ -187,7 +197,7 @@
         <div class="card-body  box-profile" style="background-color: #1A202C;">
         <div class="text-center">
             @if (Storage::disk('public')->exists(Auth::user()->photo_url))
-                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class="shadow-5 rounded-circle img-fluid' alt="User Image" style="width:70px;">    
+                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class=" rounded-circle img-fluid' alt="User Image" style="width:100px;">    
                     @else
                         <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
                     @endif
