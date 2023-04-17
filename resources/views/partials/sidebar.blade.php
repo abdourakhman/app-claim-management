@@ -29,6 +29,42 @@
                             </p>
                         </a>
                     </li>
+                    {{-- Start gestion utilisateurs --}}
+                    <li class="nav-item menu-open mt-2">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cogs"></i>
+                            <p>
+                                Administration <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: block;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-user-plus nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Ajouter utilisateur</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-user-minus nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Supprimer utilisateur</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-edit nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Modifier  utilisateur</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-eye nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Consulter utilisateurs</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- End gestion utilisateur --}}
                     {{-- Start gestion reclamation --}}
                     <li class="nav-item menu-open mt-2">
                         <a href="#" class="nav-link">
