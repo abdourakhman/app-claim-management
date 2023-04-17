@@ -4,20 +4,20 @@
 @section('content')
 <div class="content-wrapper">
     {{-- ENTETE CONTENU --}}
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Starter Page</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Starter Page</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+    <div class="jumbotron py-2">
+        <h1 class="display-4">Bienvenue, {{Auth::user()->prenom}}</h1>
+        @can('client')    
+        <p class="lead">
+           <span> <Strong>LydecResolver</Strong> est une plateforme moderne développée suite à la demande de nos clients pour pouvoir leur apporter notre aide le plus rapidement possible
+            et sans qu'ils aient à se déplacer...    
+            </span>
+        </p>
+        <hr class="my-2">
+        <p>Ici, vous pouvez déposer et suivre l'état de vos réclamations en toute simplicité... </p>
+        <p class="lead">
+          <a class="btn btn-primary btn-lg badge" href="#" role="button">Déposer une réclamation</a>
+        </p>
+        @endcan
     </div>
     {{-- END ENTETE CONTENU --}}
 
