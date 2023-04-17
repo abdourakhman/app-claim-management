@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -67,12 +68,13 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $photo_url = Storage::disk('public')->put('avatars', $data['photo']);
         return User::create([
             'email' => $data['email'],
             'nom' => $data['nom'],
             'prenom' => $data['prenom'],
             'sexe' => $data['sexe'],
-            // 'photo' => $data['photo'],
+            'photo_url' => $photo_url,
             'telephone' => $data['telephone'],
             'adresse' => $data['adresse'],
             'date_naissance' => $data['naissance'],

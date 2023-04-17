@@ -11,7 +11,11 @@
 
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
+                    @if (Storage::disk('public')->exists(Auth::user()->photo_url))
+                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">    
+                    @else
+                        <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
+                    @endif
                 </div>
                 <div class="info">
                     <a class="d-block profile-username text-center text-primary truncable text-light" href="#">{{ Auth::user()->prenom }}</a>
@@ -24,7 +28,7 @@
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
-                            <p>Tableau de Bord 
+                            <p>Tableau de Bord
                                 <span class="right badge badge-danger">All</span>
                             </p>
                         </a>
@@ -182,10 +186,14 @@
     <div style="background-color: #1A202C;">
         <div class="card-body  box-profile" style="background-color: #1A202C;">
         <div class="text-center">
-            <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/images/profil.png') }}" alt="User profile picture">
+            @if (Storage::disk('public')->exists(Auth::user()->photo_url))
+                        <img src="{{Storage::url(Auth::user()->photo_url)}}" class="shadow-5 rounded-circle img-fluid' alt="User Image" style="width:70px;">    
+                    @else
+                        <img src="{{asset('img/images/profil.png')}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px;">
+                    @endif
         </div>
 
-        <h3 class="profile-username text-center text-primary truncable">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h3>
+        <h3 class="profile-username text-center text-secondary truncable">{{ Auth::user()->prenom }} {{ Auth::user()->nom }}</h3>
 
         <p class="text-muted text-center">{{auth()->user()->profil}}</p>
 
