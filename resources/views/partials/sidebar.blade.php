@@ -45,7 +45,7 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.user.create')}}" class="nav-link">
                                     <i class="fas fa-user-plus nav-icon"></i>
                                     <p style="font-size: 0.8em;">Ajouter utilisateur</p>
                                 </a>
