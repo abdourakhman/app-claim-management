@@ -51,19 +51,19 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.user.delete')}}" class="nav-link">
                                     <i class="fas fa-user-minus nav-icon"></i>
                                     <p style="font-size: 0.8em;">Supprimer utilisateur</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.user.edit')}}" class="nav-link">
                                     <i class="fas fa-edit nav-icon"></i>
                                     <p style="font-size: 0.8em;">Modifier  utilisateur</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('admin.user.list')}}" class="nav-link">
                                     <i class="fas fa-eye nav-icon"></i>
                                     <p style="font-size: 0.8em;">Consulter utilisateurs</p>
                                 </a>

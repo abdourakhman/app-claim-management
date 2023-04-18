@@ -3,13 +3,13 @@
 @include('partials.navbar')
 @include('partials.sidebar')
 @section('content')
-<div class="container mt-2 mr-4">
+<div class="content-wrapper">
     <div class="text-center">
         <img class="img-circle" style="width: 10%;" src="{{asset('img/images/logo.png')}}" alt="logo">
     </div>
     <hr class="w-50">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-11">
             <div class="card  card-outline " style="border-top: 6px solid rgb(47 65 117);">
                 <div class="card-header text-center text-gray font-weight-bold">{{ __('CREATION UTILISATEUR') }}</div>
 
@@ -72,14 +72,16 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <label class="col-form-label px-2" for="profil">Profil</label>
-                            <select name="profil" id="profil" class="form-control">
-                                <option value="admin">Administrateur</option>
-                                <option value="gestionnaire">Manager</option>
-                                <option value="technicien">Technicien</option>
-                                <option value="client">Client</option>
+                            <div class="input-group-prepend">
+                              <label class="input-group-text" for="inputGroupSelect01">Profil</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01" name=profil>
+                              <option selected>Choisir un profil</option>
+                              <option value="admin">Administrateur</option>
+                              <option value="gestionnaire">Manager</option>
+                              <option value="client">Client</option>
                             </select>
-                        </div>
+                          </div>
 
                         
                         

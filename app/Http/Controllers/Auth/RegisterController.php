@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
@@ -68,7 +69,30 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $photo_url = Storage::disk('public')->put('avatars', $data['photo']);
+        // Créer une instance Intervention\Image\Image à partir des données de la photo
+        $image = Image::make($data['photo']);
+
+        // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
+        $image->fit(50, 50);
+
+        // Encoder l'image dans le format approprié en fonction de l'extension du fichier
+        if ($data['photo']->extension() == 'png') {
+            $imageData = $image->encode('png', 80);
+        } elseif ($data['photo']->extension() == 'gif') {
+            $imageData = $image->encode('gif');
+        } else {
+            $imageData = $image->encode('jpg', 80);
+        }
+
+        // Générer un nom de fichier unique pour la nouvelle image
+        $filename = uniqid('avatar_', true) . '.' . $data['photo']->extension();
+
+        // Stocker l'image dans le système de fichiers public de Laravel
+        Storage::disk('public')->put('avatars/' . $filename, $imageData);
+
+        // Enregistrer l'URL de l'image dans la base de données
+        $photo_url = 'avatars/' . $filename;
+
         return User::create([
             'email' => $data['email'],
             'nom' => $data['nom'],

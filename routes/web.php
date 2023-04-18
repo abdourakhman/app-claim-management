@@ -19,4 +19,9 @@ Auth::routes();
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/admin/createUser', [AdminController::class, 'createUser'])->name('admin.user.create');
+Route::get('/admin/deleteUser', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
+Route::get('/admin/listUser', [AdminController::class, 'listUser'])->name('admin.user.list');
+Route::get('/admin/editUser', [AdminController::class, 'editUser'])->name('admin.user.edit');
+
+
 
