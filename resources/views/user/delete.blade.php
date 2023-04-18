@@ -37,9 +37,11 @@
                                 <tr>
                                     <th scope="row">{{$user->id}}</th>
                                     <td @if ($user->profil == 'admin')
-                                        class ="badge badge-success mt-1"
+                                        class =" mt-3 btn btn-danger py-0 badge"
                                         @elseif($user->profil == 'gestionnaire')
-                                        class ="badge badge-primary mt-1"
+                                        class ="mt-3 btn btn-primary py-0 badge"
+                                        @else
+                                        class='mt-3 btn btn-secondary py-0 badge'
                                     @endif>
                                         {{$user->profil}}
                                     </td>
@@ -47,7 +49,7 @@
                                     <td>{{$user->nom}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-danger badge">supprimer</a>
+                                        <a href="{{route('admin.user.remove',$user->id)}}" class="btn btn-danger badge">supprimer</a>
                                     </td>
                                 </tr>
                                 @endforeach

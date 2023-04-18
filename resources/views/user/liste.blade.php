@@ -42,9 +42,11 @@
                                         <img src="{{Storage::url($user->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px; heigth:10px;">    
                                     </th>
                                     <td @if ($user->profil == 'admin')
-                                        class =" badge badge-success mt-2"
+                                        class =" btn  btn-danger badge py-0 mt-3"
                                         @elseif($user->profil == 'gestionnaire')
-                                        class ="badge badge-primary mt-2"
+                                        class ="btn btn-primary py-0 badge  mt-3"
+                                        @else
+                                        class='btn btn-success py-0 badge mt-3'
                                     @endif>
                                         {{$user->profil}}
                                     </td>

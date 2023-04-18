@@ -47,7 +47,7 @@
                                     <td>{{$user->nom}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-info badge">Mettre à jour</a>
+                                        <a href="{{route('admin.user.edit.form',$user->id)}}" class="btn btn-info badge">Mettre à jour</a>
                                     </td>
                                 </tr>
                                 @endforeach
