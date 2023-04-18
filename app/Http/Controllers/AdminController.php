@@ -18,32 +18,41 @@ class AdminController extends Controller
     }
 
     public function saveUser(Request $request){
-        $photo_url = "img/images/profil.png";
-        // Créer une instance Intervention\Image\Image à partir des données de la photo
-       if($request->photo){
-           $image = Image::make($request->photo);
-   
-           // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
-           $image->fit(50, 50);
-   
-           // Encoder l'image dans le format approprié en fonction de l'extension du fichier
-           if ($request->photo->extension() == 'png') {
-               $imageData = $image->encode('png', 80);
-           } elseif ($request->photo->extension() == 'gif') {
-               $imageData = $image->encode('gif');
-           } else {
-               $imageData = $image->encode('jpg', 80);
-           }
-   
-           // Générer un nom de fichier unique pour la nouvelle image
-           $filename = uniqid('avatar_', true) . '.' . $request->photo->extension();
-   
-           // Stocker l'image dans le système de fichiers public de Laravel
-           Storage::disk('public')->put('avatars/' . $filename, $imageData);
-   
-           // Enregistrer l'URL de l'image dans la base de données
-           $photo_url = 'avatars/' . $filename;
-       }
+        $success = false;
+    $default_photo_path = "img/images/profil.png";
+
+    // Enregistrer l'image par défaut dans le système de fichiers Laravel
+    if (!Storage::disk('public')->exists($default_photo_path)) {
+        Storage::disk('public')->put($default_photo_path, file_get_contents(public_path($default_photo_path)));
+    }
+
+    $photo_url = $default_photo_path;
+
+    // Créer une instance Intervention\Image\Image à partir des données de la photo
+    if($request->photo){
+        $image = Image::make($request->photo);
+
+        // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
+        $image->fit(50, 50);
+
+        // Encoder l'image dans le format approprié en fonction de l'extension du fichier
+        if ($request->photo->extension() == 'png') {
+            $imageData = $image->encode('png', 80);
+        } elseif ($request->photo->extension() == 'gif') {
+            $imageData = $image->encode('gif');
+        } else {
+            $imageData = $image->encode('jpg', 80);
+        }
+
+    // Générer un nom de fichier unique pour la nouvelle image
+    $filename = uniqid('avatar_', true) . '.' . $request->photo->extension();
+
+    // Stocker l'image dans le système de fichiers public de Laravel
+    Storage::disk('public')->put('avatars/' . $filename, $imageData);
+
+    // Enregistrer l'URL de l'image dans la base de données
+    $photo_url = 'avatars/' . $filename;
+}
        
         $user = new User;
         $user->prenom = $request->prenom;
@@ -60,7 +69,7 @@ class AdminController extends Controller
         if($user->profil == 'client'){$user->client()->save(new Client(['CIN' =>'A9VBJFS1'.$user->id]));}
         if($user->profil == 'gestionnaire'){$user->gestionnaire()->save(new Gestionnaire);}
         if($user->profil == 'technicien'){$user->technicien()->save(new Technicien);}
-        return redirect('/');
+        return view('user.form')->with('success', $success=true);
     }
 
     public function deleteUser(){
@@ -81,7 +90,8 @@ class AdminController extends Controller
             Technicien::where('user_id',$user->id)->delete();
 
         $user->delete();
-        return  redirect('/');
+        $success = true;
+        return  view('home')->with('success', $success);
     }
 
     public function listUser(){
@@ -136,6 +146,7 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->date_naissance = $request->naissance; 
         $user->save();
-        return  redirect('/');
+        $success = true;
+        return  view('home')->with('success',$success);
     }
 }

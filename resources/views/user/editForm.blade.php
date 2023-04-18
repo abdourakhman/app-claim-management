@@ -43,7 +43,7 @@
                         </div>
 
                         <div class="input-group mb-3">
-                            <input type="password"  placeholder="Mot de passe" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <input type="password"  placeholder="Mot de passe"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -78,10 +78,10 @@
                             </div>
                             <select class="custom-select" id="inputGroupSelect01" name=profil>
                               <option selected>{{$user->profil}}</option>
-                              <option value="admin">Administrateur</option>
-                              <option value="gestionnaire">Manager</option>
-                              <option value="technicien">Technicien</option>
-                              <option value="client">Client</option>
+                              <option value="admin">admin</option>
+                              <option value="gestionnaire">gestionnaire</option>
+                              <option value="technicien">technicien</option>
+                              <option value="client">client</option>
                             </select>
                           </div>
 
@@ -90,9 +90,15 @@
                         <div class=" input-group mb-3">
                             <div class="mr-5">
                                 <label for="homme" class="px-2">Homme</label>
-                                <input type="radio" name="sexe" class="px-2" id="homme" value="H" checked>
+                                <input type="radio" name="sexe" class="px-2" id="homme" value="H"  @if ($user->sexe == 'H')    
+                                checked
+                                @endif
+                                >
                                 <label for="femme" class="px-2 col-form-label">Femme</label>
-                                <input class="px-2"  type="radio" name="sexe" id="femme" value="F">
+                                <input class="px-2"  type="radio" name="sexe" id="femme" value="F"  @if ($user->sexe == 'F')    
+                                checked
+                                @endif
+                                >
                             </div>
                             <label for="naissance" class=" col-form-label px-2 @error('naissance') is-invalid @enderror" name="naissance">{{ __('Date Naissance') }}</label>
                             <input type="date" placeholder="Date de naissance" class="form-control" name="naissance" value="{{$user->date_naissance }}" required autocomplete="naissance" autofocus>

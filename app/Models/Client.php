@@ -11,6 +11,8 @@ class Client extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['CIN'];
+
     public function user(){
         return $this->belongsTo(User::class);
     }

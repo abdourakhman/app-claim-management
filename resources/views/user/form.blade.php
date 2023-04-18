@@ -14,6 +14,14 @@
                 <div class="card-header text-center text-gray font-weight-bold">{{ __('CREATION UTILISATEUR') }}</div>
 
                 <div class="card-body">
+                    @if ($success ?? "")
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Utilisateur</strong> créé avec success ! 
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                    @endif
                     <form method="POST" action="{{ route('admin.user.save') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="input-group mb-3">
