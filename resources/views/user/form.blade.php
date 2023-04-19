@@ -84,15 +84,29 @@
                               <label class="input-group-text" for="inputGroupSelect01">Profil</label>
                             </div>
                             <select class="custom-select" id="inputGroupSelect01" name=profil>
-                              <option selected>Choisir un profil</option>
-                              <option value="admin">Administrateur</option>
-                              <option value="gestionnaire">Manager</option>
+                              <option selected disabled>Choisir un profil</option>
+                              <option value="gestionnaire">gestionnaire</option>
                               <option value="technicien">Technicien</option>
                               <option value="client">Client</option>
                             </select>
                           </div>
+                          
+                          <div id="technicien-field" class="input-group mb-3" style="display: none;">
+                            <select class="custom-select w-50" id="inputGroupSelect02" name="technicien_type">
+                              <option selected disabled>Choisir specialité technicien</option>
+                              <option value="eau">Eau</option>
+                              <option value="electricite">Electricité</option>
+                            </select>
+                          </div>
 
-                        
+                          <div id="cin-field" class="input-group mb-3" style="display: none;">
+                            <div class="input-group-append">
+                                <input type="text" placeholder="N° Identifiant National" class="form-control w-50" name="cin" required autocomplete="cin" autofocus>
+                              <div class="input-group-text">
+                                <span class="fas fa-id-card"></span>
+                              </div>
+                            </div>
+                          </div>
                         
                         <div class=" input-group mb-3">
                             <div class="mr-5">

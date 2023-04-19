@@ -53021,4 +53021,9 @@ a.text-muted:hover {
     transition: right 0.3s ease-in-out, display 0.3s ease-in-out;
 }
 
+.truncable{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
 
