@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInterventionTechniciensTable extends Migration
+class CreateTechnicienTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateInterventionTechniciensTable extends Migration
      */
     public function up()
     {
-        Schema::create('intervention_techniciens', function (Blueprint $table){ 
-            $table->date("date");
+        Schema::create('technicien_type', function (Blueprint $table) {
             $table->timestamps();
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
-            $table->foreignId('intervention_id')->onDelete("cascacde")->onUpdate("cascade");
+            $table->foreignId('type_id')->onDelete("cascacde")->onUpdate("cascade");            
         });
 
         Schema::enableForeignKeyConstraints();
@@ -30,9 +29,10 @@ class CreateInterventionTechniciensTable extends Migration
      */
     public function down()
     {
-        Schema::table('intervention_techniciens', function (Blueprint $table) {
-            $table->dropForeign(['technicien_id','intervention_id']);
+        Schema::table('technicien_type', function (Blueprint $table) {
+            $table->dropForeign(['type_id','technicien_id']);
         });
-        Schema::dropIfExists('intervention_techniciens');
+        
+        Schema::dropIfExists('technicien_type');
     }
 }

@@ -26356,6 +26356,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 var select = document.getElementById("inputGroupSelect01");
 var cinField = document.getElementById("cin-field");
 var technicienField = document.getElementById("technicien-field");
+var typesTechnicien = document.getElementById("types");
 select.addEventListener("change", function () {
   var selectedValue = select.value;
   if (selectedValue === "client") {
@@ -26368,6 +26369,7 @@ select.addEventListener("change", function () {
     cinField.style.display = "none";
     technicienField.style.display = "none";
   }
+  typesTechnicien.innerText();
 });
 
 /***/ }),

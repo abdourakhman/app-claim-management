@@ -8,6 +8,7 @@ import "admin-lte/dist/js/adminlte";
 const select = document.getElementById("inputGroupSelect01");
   const cinField = document.getElementById("cin-field");
   const technicienField = document.getElementById("technicien-field");
+  const typesTechnicien = document.getElementById("types");
 
   select.addEventListener("change", () => {
     const selectedValue = select.value;
@@ -21,4 +22,5 @@ const select = document.getElementById("inputGroupSelect01");
       cinField.style.display = "none";
       technicienField.style.display = "none";
     }
+    typesTechnicien.innerText()
   });

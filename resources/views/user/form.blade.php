@@ -83,7 +83,7 @@
                             <div class="input-group-prepend">
                               <label class="input-group-text" for="inputGroupSelect01">Profil</label>
                             </div>
-                            <select class="custom-select" id="inputGroupSelect01" name=profil>
+                            <select class="custom-select" id="inputGroupSelect01" name=profil required>
                               <option selected disabled>Choisir un profil</option>
                               <option value="gestionnaire">gestionnaire</option>
                               <option value="technicien">Technicien</option>
@@ -91,17 +91,19 @@
                             </select>
                           </div>
                           
-                          <div id="technicien-field" class="input-group mb-3" style="display: none;">
-                            <select class="custom-select w-50" id="inputGroupSelect02" name="technicien_type">
-                              <option selected disabled>Choisir specialité technicien</option>
-                              <option value="eau">Eau</option>
-                              <option value="electricite">Electricité</option>
-                            </select>
+                          <div id="technicien-field" style="display:none;">
+                            <div>
+                            <label>Types de techniciens :</label>
+                              <input class="ml-3" type="checkbox" id="checkbox1" name="type_eau" value="eau" checked>
+                              <label for="checkbox1">Eau</label>
+                              <input class="ml-3" type="checkbox" id="checkbox2" name="type_electricite" value="electricite">
+                              <label for="checkbox2">Electricité</label>
+                            </div>
                           </div>
 
                           <div id="cin-field" class="input-group mb-3" style="display: none;">
                             <div class="input-group-append">
-                                <input type="text" placeholder="N° Identifiant National" class="form-control w-50" name="cin" required autocomplete="cin" autofocus>
+                                <input type="text" placeholder="N° Identifiant National" class="form-control w-50" name="cin"  autocomplete="cin" autofocus>
                               <div class="input-group-text">
                                 <span class="fas fa-id-card"></span>
                               </div>

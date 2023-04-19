@@ -27,7 +27,7 @@ class CreateGestionnairesTable extends Migration
      */
     public function down()
     {
-        Schema::table('reclamation_techniciens', function (Blueprint $table) {
+        Schema::table('reclamation_technicien', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
         });
         Schema::dropIfExists('gestionnaires');

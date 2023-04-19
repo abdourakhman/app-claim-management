@@ -16,8 +16,8 @@ class TypeTechnicienSeeder extends Seeder
     {
         DB::table('types')->insert(
             [
-                ["nom" => "electricite"],
                 ["nom" => "eau"],
+                ["nom" => "electricite"],
             ]
         );
     }

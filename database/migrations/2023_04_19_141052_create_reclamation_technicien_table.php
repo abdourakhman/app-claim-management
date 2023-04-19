@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReclamationTechniciensTable extends Migration
+class CreateReclamationTechnicienTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReclamationTechniciensTable extends Migration
      */
     public function up()
     {
-        Schema::create('reclamation_techniciens', function (Blueprint $table) {
+        Schema::create('reclamation_technicien', function (Blueprint $table) {
             $table->timestamps();
             $table->foreignId('reclamation_id')->onDelete("cascacde")->onUpdate("cascade");
             $table->foreignId('technicien_id')->onDelete("cascacde")->onUpdate("cascade");
@@ -29,10 +29,10 @@ class CreateReclamationTechniciensTable extends Migration
      */
     public function down()
     {
-        Schema::table('reclamation_techniciens', function (Blueprint $table) {
+        Schema::table('reclamation_technicien', function (Blueprint $table) {
             $table->dropForeign(['reclamation_id','technicien_id']);
         });
 
-        Schema::dropIfExists('reclamation_techniciens');
+        Schema::dropIfExists('reclamation_technicien');
     }
 }

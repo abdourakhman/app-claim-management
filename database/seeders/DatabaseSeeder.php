@@ -25,16 +25,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(TypeTechnicienSeeder::class);
-        User::factory(165)->create();
-        Client::factory(100)->create();
-        Gestionnaire::factory(15)->create();
-        Technicien::factory(50)->create();
-        Reclamation::factory(150)->create();
-        Fiche::factory(100)->create();
-        Intervention::factory(150)->create();
-        TechnicienType::factory(50)->create();
-        ReclamationTechnicien::factory(150)->create();
-        InterventionTechnicien::factory(150)->create();
+        // User::factory(165)->create();
+        // Client::factory(100)->create();
+        // Gestionnaire::factory(15)->create();
+        // Technicien::factory(50)->create();
+        // Reclamation::factory(150)->create();
+        // Fiche::factory(100)->create();
+        // Intervention::factory(150)->create();
+        // TechnicienType::factory(50)->create();
+        // ReclamationTechnicien::factory(150)->create();
+        // InterventionTechnicien::factory(150)->create();
 
 
         // \App\Models\User::factory(10)->create();

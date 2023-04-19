@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Type;
 use App\Models\User;
 use App\Models\Client;
 use App\Models\Technicien;
@@ -66,9 +67,21 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->date_naissance = $request->naissance; 
         $user->save();
-        if($user->profil == 'client'){$user->client()->save(new Client(['CIN' =>'A9VBJFS1'.$user->id]));}
+        if($user->profil == 'client'){
+            $user->client()->save(new Client(['CIN' =>$request->cin]));
+        }
         if($user->profil == 'gestionnaire'){$user->gestionnaire()->save(new Gestionnaire);}
-        if($user->profil == 'technicien'){$user->technicien()->save(new Technicien);}
+        if($user->profil == 'technicien'){
+            $technicien = $user->technicien()->save(new Technicien);
+            if($request->type_eau){
+                $type = Type::where('nom',$request->type_eau)->first();
+                $technicien->types()->attach($type->id);
+            }
+            if($request->type_electricite){
+                $type = Type::where('nom',$request->type_electricite)->first();
+                $technicien->types()->attach($type->id);
+            }
+        }
         return view('user.form')->with('success', $success=true);
     }
 
