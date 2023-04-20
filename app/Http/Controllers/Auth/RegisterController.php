@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -68,33 +70,38 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $default_photo_path = "img/images/profil.png";
+        $photo_url = $default_photo_path;
         //tester si la variable existe 
-        // sinon donner une valeur par défaut 
-        // et le mettre dans le storage 
-        dd($data);
-        // Créer une instance Intervention\Image\Image à partir des données de la photo
-        $image = Image::make($data['photo']);
+        if(isset($data['photo'])){
+            $image = Image::make($data['photo']);
 
-        // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
-        $image->fit(50, 50);
-
-        // Encoder l'image dans le format approprié en fonction de l'extension du fichier
-        if ($data['photo']->extension() == 'png') {
-            $imageData = $image->encode('png', 80);
-        } elseif ($data['photo']->extension() == 'gif') {
-            $imageData = $image->encode('gif');
-        } else {
-            $imageData = $image->encode('jpg', 80);
+            // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
+            $image->fit(50, 50);
+    
+            // Encoder l'image dans le format approprié en fonction de l'extension du fichier
+            if ($data['photo']->extension() == 'png') {
+                $imageData = $image->encode('png', 80);
+            } elseif ($data['photo']->extension() == 'gif') {
+                $imageData = $image->encode('gif');
+            } else {
+                $imageData = $image->encode('jpg', 80);
+            }
+    
+            // Générer un nom de fichier unique pour la nouvelle image
+            $filename = uniqid('avatar_', true) . '.' . $data['photo']->extension();
+    
+            // Stocker l'image dans le système de fichiers public de Laravel
+            Storage::disk('public')->put('avatars/' . $filename, $imageData);
+    
+            // Enregistrer l'URL de l'image dans la base de données
+            $photo_url = 'avatars/' . $filename;
         }
-
-        // Générer un nom de fichier unique pour la nouvelle image
-        $filename = uniqid('avatar_', true) . '.' . $data['photo']->extension();
-
-        // Stocker l'image dans le système de fichiers public de Laravel
-        Storage::disk('public')->put('avatars/' . $filename, $imageData);
-
-        // Enregistrer l'URL de l'image dans la base de données
-        $photo_url = 'avatars/' . $filename;
+        else{
+            if (!Storage::disk('public')->exists($default_photo_path)) {
+                Storage::disk('public')->put($default_photo_path, file_get_contents(public_path($default_photo_path)));
+            }
+        }
 
         $user = User::create([
             'email' => $data['email'],
