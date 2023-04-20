@@ -15,7 +15,7 @@
         <hr class="my-2">
         <p>Ici, vous pouvez déposer et suivre l'état de vos réclamations en toute simplicité... </p>
         <p class="lead">
-          <a class="btn btn-primary btn-lg badge" href="#" role="button">Déposer une réclamation</a>
+          <a class="btn btn-primary btn-lg badge" href="{{route('customer.claim.create')}}" role="button">Déposer une réclamation</a>
         </p>
         @endcan
     </div>
@@ -36,35 +36,30 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title card-primary card-outline"><strong>Notre vision</strong></h5>
                             <p class="card-text">
-                                {{(Auth::user()->photo_url)}}
+                                Apporter au quotidien des services essentiels de qualité aux citoyens et aux acteurs économiques dans un esprit d'efficience, d'innovation et de partenariat pour contribuer au développement durable de notre territoire d'ancrage.
                             </p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
+                            <a href="https://client.lydec.ma/site/notre-vision" class="card-link">Plus d'informations...</a>
                         </div>
                     </div>
                     <div class="card card-primary card-outline">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title"><strong>Notre mission</strong> </h5>
                             <p class="card-text">
-                                Some quick example text to build on the card title and make up the bulk of the card's
-                                content.
+                                Lydec est un opérateur de services publics qui gère la distribution d'eau et d'électricité, la collecte des eaux usées et pluviales et l'éclairage public pour 4,2 millions d'habitants de la région du Grand Casablanca (Maroc). Ces missions lui ont été confiées dans le cadre d'un contrat de gestion déléguée signé en 1997 par l'Autorité Délégante (Communes urbaines de Casablanca, Mohammedia et Aïn Harrouda), l'Autorité de Tutelle (Ministère de l'Intérieur) et le Délégataire (Lydec).
                             </p>
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="m-0">Featured</h5>
+                            <h5 class="m-0">Nos clients</h5>
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <p class="card-text">Pour toute demande d'information ou de dépannage, plusieurs canaux de contact sont mis à la disposition de nos clients : le Centre de Relation clientèle, les agences Lydec, l'agence en ligne, le blog Lydec, l'application mobile Lydec.</p>
+                            <a href="https://client.lydec.ma/site/nos-clients" class="btn btn-primary">Plus de détail...</a>
                         </div>
                     </div>
                     <div class="card card-primary card-outline">
@@ -72,9 +67,9 @@
                             <h5 class="m-0">Featured</h5>
                         </div>
                         <div class="card-body">
-                            <h6 class="card-title">Special title treatment</h6>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <h6 class="card-title">Nos valeurs</h6>
+                            <p class="card-text">Lydec est à l'écoute des clients pour anticiper leurs attentes et répondre à leurs besoins afin de construire avec eux une relation de confiance.</p>
+                            <a href="https://client.lydec.ma/site/nos-valeurs-1" class="btn btn-primary">En savoir d'avantage</a>
                         </div>
                     </div>
                 </div>

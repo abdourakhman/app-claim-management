@@ -16,7 +16,7 @@ class CreateInterventionsTable extends Migration
         Schema::create('interventions', function (Blueprint $table) {
             $table->id();
             $table->string("lieu");
-            $table->boolean('statut')->default(false);
+            $table->string('statut')->default("en attente");
             $table->timestamps();
         });
     }

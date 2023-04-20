@@ -24,7 +24,7 @@
 
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
+                    @cannot('client')     
                     <li class="nav-item">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -33,6 +33,37 @@
                             </p>
                         </a>
                     </li>
+                    @endcannot
+                    @can('client')
+                    <li class="nav-item menu-open mt-2">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-exclamation"></i>
+                            <p>
+                                Réclamation <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview" style="display: block;">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-paper-plane nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Réclamations déposées</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">
+                                    <i class="fas fa-spinner nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Réclamations en cours</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('customer.claim.create')}}" class="nav-link  bg-primary">
+                                    <i class="fas fa-share nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Déposer une réclamation</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endcan
                     {{-- Start gestion utilisateurs --}}
                     @can('admin')
                         
@@ -141,7 +172,7 @@
                     {{-- End gestion techniciens --}}
                     @endcan
                     {{-- Start gestion interventions --}}
-                    @can('technicien')
+                    @can('technicien','manager')
                         
                     <li class="nav-item menu-open mt-2">
                         <a href="#" class="nav-link">

@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
-use Intervention\Image\Facades\Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -31,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::LOGIN;
+    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -69,6 +68,10 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //tester si la variable existe 
+        // sinon donner une valeur par défaut 
+        // et le mettre dans le storage 
+        dd($data);
         // Créer une instance Intervention\Image\Image à partir des données de la photo
         $image = Image::make($data['photo']);
 
@@ -93,7 +96,7 @@ class RegisterController extends Controller
         // Enregistrer l'URL de l'image dans la base de données
         $photo_url = 'avatars/' . $filename;
 
-        return User::create([
+        $user = User::create([
             'email' => $data['email'],
             'nom' => $data['nom'],
             'prenom' => $data['prenom'],
@@ -104,5 +107,7 @@ class RegisterController extends Controller
             'date_naissance' => $data['naissance'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->client()->save(new Client(['CIN' =>$data['cin']]));
+        return $user;
     }
 }

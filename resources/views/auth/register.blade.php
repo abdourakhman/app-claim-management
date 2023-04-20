@@ -51,22 +51,29 @@
                         </div>
 
                         <div class="input-group mb-3">
+                            <input type="text" placeholder="telephone" class="form-control " name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone" autofocus>
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
                             <input type="text" placeholder="adresse" class="form-control " name="adresse" value="{{ old('adresse') }}" required autocomplete="adresse" autofocus>
                             <div class="input-group-append">
                                 <div class="input-group-text">
                                     <span class="fas fa-home"></span>
                                 </div>
                             </div>
-                            <input type="text" placeholder="telephone" class="form-control " name="telephone" value="{{ old('telephone') }}" required autocomplete="telephone" autofocus>
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <input type="text" placeholder="Carte identfiant national" class="form-control " name="cin" value="{{ old('cin') }}" required autocomplete="cin" autofocus>
                             <div class="input-group-append">
                                 <div class="input-group-text">
-                                    <span class="fas fa-phone"></span>
+                                    <span class="fas fa-id-card"></span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="input-group mb-3 w-100">
-                            <input type="file" style="width:94%;" class="form-control-file px-0 border  @error('photo') is-invalid @enderror" name="photo" value="{{ old('photo') }}" autofocus>
+                            <input type="file" style="width:94%;" class="form-control-file px-0 border  @error('photo') is-invalid @enderror" name="photo" value="img/images/profil.png" autofocus >
                             <div class="input-group-append" style="width:6%;">
                                 <div class="input-group-text">
                                     <span class="fas fa-id-card"></span>

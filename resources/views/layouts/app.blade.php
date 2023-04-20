@@ -42,7 +42,7 @@
                                 <li class="nav-item px-3">
                                     <a class="navbar-brand text-light text-right" href="{{ route('login') }}">
                                         {{-- TODO soulinger le span suivant la route courante --}}
-                                        <span class="brand-text" style="text-decoration:underline;">{{ __('Login') }}</span>
+                                        <span class="brand-text">{{ __('Login') }}</span>
                                     </a>
                                 </li>
                             @endif
