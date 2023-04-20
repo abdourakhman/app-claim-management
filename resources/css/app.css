@@ -13,3 +13,9 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+.titre{font-style:italic; font-size:2em; opacity: 1; animation:titleAnimate 1s ease-in-out; transform:translateY(20px); text-align: right;}
+    @keyframes titleAnimate {
+        0% {opacity: 0; transform:translateY(20px);}
+        100% { opacity: 0.5; transform: translateY(0);}
+    }

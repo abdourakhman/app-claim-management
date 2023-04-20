@@ -44,15 +44,15 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('customer.claim.deposit')}}" class="nav-link">
                                     <i class="fas fa-paper-plane nav-icon"></i>
                                     <p style="font-size: 0.8em;">Réclamations déposées</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('customer.claim.processed')}}" class="nav-link">
                                     <i class="fas fa-spinner nav-icon"></i>
-                                    <p style="font-size: 0.8em;">Réclamations en cours</p>
+                                    <p style="font-size: 0.8em;">Réclamations en traitement</p>
                                 </a>
                             </li>
                             <li class="nav-item">

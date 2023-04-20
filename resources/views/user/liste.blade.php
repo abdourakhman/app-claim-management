@@ -12,7 +12,6 @@
         <div class="col-md-11">
             <div class="card  card-outline " style="border-top: 6px solid rgb(47 65 117);">
                 <div class="card-header text-center text-gray font-weight-bold">{{ __('LES UTILISATEURS DU SYSTEME') }}</div>
-
                 <div class="card-body">
                     <form class="form-inline my-2 float-right ">
                             <input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search">
@@ -42,11 +41,13 @@
                                         <img src="{{Storage::url($user->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px; heigth:10px;">    
                                     </th>
                                     <td @if ($user->profil == 'admin')
-                                        class =" btn  btn-danger badge py-0 mt-3"
+                                        class ="badge py-1 px-5 bg-danger  mt-3"
                                         @elseif($user->profil == 'gestionnaire')
-                                        class ="btn btn-primary py-0 badge  mt-3"
+                                        class ="badge py-1 bg-primary px-4 mt-3"
+                                        @elseif($user->profil == 'technicien')
+                                        class ="badge py-1 bg-info px-4  mt-3"
                                         @else
-                                        class='btn btn-success py-0 badge mt-3'
+                                        class ="badge py-1 bg-secondary px-5 mt-3"
                                     @endif>
                                         {{$user->profil}}
                                     </td>

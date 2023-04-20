@@ -17,7 +17,7 @@ class CreateReclamationsTable extends Migration
             $table->id();
             $table->string("designation");
             $table->text("description")->nullable();
-            $table->string('statut')->default("déposée");
+            $table->string('statut')->default("déposée"); //déposée-annulée-traitée-clôturée
             $table->date("date");
             $table->foreignId("client_id")->onDelete("cascade")->onUpdate("cascade");
             $table->foreignId("gestionnaire_id")->nullable()->onDelete("cascade")->onUpdate("cascade");

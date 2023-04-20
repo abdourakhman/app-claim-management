@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -54,7 +55,19 @@ class AdminController extends Controller
     // Enregistrer l'URL de l'image dans la base de données
     $photo_url = 'avatars/' . $filename;
 }
-       
+        $validator = Validator::make($request->all(), [
+            'profil' => 'required',
+            'password' => 'required',
+            'naissance' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()
+                        ->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $user = new User;
         $user->prenom = $request->prenom;
         $user->nom = $request->nom;

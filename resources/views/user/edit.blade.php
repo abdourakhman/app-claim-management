@@ -37,9 +37,13 @@
                                 <tr>
                                     <th scope="row">{{$user->id}}</th>
                                     <td @if ($user->profil == 'admin')
-                                        class ="badge badge-success mt-1"
+                                        class ="badge py-1 px-5 bg-danger  mt-3"
                                         @elseif($user->profil == 'gestionnaire')
-                                        class ="badge badge-primary mt-1"
+                                        class ="badge py-1 bg-primary px-4 mt-3"
+                                        @elseif($user->profil == 'technicien')
+                                        class ="badge py-1 bg-info px-4  mt-3"
+                                        @else
+                                        class ="badge py-1 bg-secondary px-5 mt-3"
                                     @endif>
                                         {{$user->profil}}
                                     </td>
