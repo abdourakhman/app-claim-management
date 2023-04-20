@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Reclamation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
@@ -12,13 +13,50 @@ class CustomerController extends Controller
 
 
     public function getDepositClaim(){
-        $claims = Reclamation::all();
-        return view('claim.list')->with('claims', $claims);
+        $client = DB::table('clients')
+                ->where('user_id', '=', Auth::user()->id)
+                ->first();
+
+        $claims = DB::table('reclamations')
+                ->select('designation','description', 'date', 'created_at')
+                ->where('client_id', '=', $client->id)
+                ->get();
+
+        $claimsDay = DB::table('reclamations')
+                ->select('date')
+                ->distinct()
+                ->where('client_id', '=', $client->id)                
+                ->where('statut', '=', 'déposée')
+                ->get();
+
+        return view('claim.list',
+                    [
+                    'claims' => $claims,
+                    'claimsDay' =>$claimsDay
+                    ]);
     }
 
     public function getProcessedClaim(){
-        $claims = Reclamation::where('statut', 'affectée')->get();
-        return view('claim.listProcessed')->with('claims', $claims);
+        $client = DB::table('clients')
+                ->where('user_id', '=', Auth::user()->id)
+                ->first();
+
+        $claims = DB::table('reclamations')
+                ->where('client_id', '=', $client->id)
+                ->get();
+
+        $claimsDay = DB::table('reclamations')
+                ->select('date')
+                ->distinct()
+                ->where('client_id', '=', $client->id)                
+                ->where('statut', '=', 'en cours')
+                ->get();
+
+        return view('claim.listProcessed',
+                    [
+                    'claims' => $claims,
+                    'claimsDay' =>$claimsDay
+                    ]);
     }
 
     public function createClaim(){

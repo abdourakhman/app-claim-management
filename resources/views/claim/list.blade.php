@@ -10,11 +10,51 @@
     <hr class="w-50">
     <div class="row justify-content-center">
         <div class="col-md-11">
-            @forelse ($claims as $claim)
-            {{ $claim->designation}}
-            @empty
-                <h1>Aucune réclamation n'a été déposée !</h1>
-            @endforelse
+            @if($claims->count() !=0 )
+            <section class="content-header mt-0">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1>Historique</h1>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="content mt-0">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="timeline">
+                                @foreach($claimsDay as $claimDay)     
+                                <div class="time-label">
+                                    <span class="bg-red">{{$claimDay->date}}</span>
+                                </div>
+                                @foreach ($claims as $claim)
+                                <div>
+                                    <i class="fas fa-envelope bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock">{{$claim->created_at}}</i> </span>
+                                        <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
+                                        <div class="timeline-body">
+                                            {{$claim->description}}
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-sm">Consulter</a>
+                                            <a class="btn btn-danger btn-sm">Annuler</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            @endif
+            @if($claims->count() == 0)
+                <h1 class="titre mr-5 px-5">Aucune réclamation n'a été déposée !</h1>
+            @endif
         </div>
     </div>
 </div>
