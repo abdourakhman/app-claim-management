@@ -56,6 +56,12 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="{{route('customer.claim.aborted')}}" class="nav-link">
+                                    <i class="fas fa-undo nav-icon"></i>
+                                    <p style="font-size: 0.8em;">Réclamations annulée</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{route('customer.claim.create')}}" class="nav-link  bg-primary">
                                     <i class="fas fa-share nav-icon"></i>
                                     <p style="font-size: 0.8em;">Déposer une réclamation</p>
@@ -115,7 +121,7 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('manager.claim.getAll')}}" class="nav-link">
                                     <i class="fas fa-list nav-icon"></i>
                                     <p style="font-size: 0.8em;">Toutes les réclamations</p>
                                 </a>

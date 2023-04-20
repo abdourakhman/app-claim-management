@@ -18,8 +18,9 @@ class CustomerController extends Controller
                 ->first();
 
         $claims = DB::table('reclamations')
-                ->select('designation','description', 'date', 'created_at')
+                ->select('id','designation','description', 'date', 'created_at')
                 ->where('client_id', '=', $client->id)
+                ->where('statut', '=', 'déposée')
                 ->get();
 
         $claimsDay = DB::table('reclamations')
@@ -73,7 +74,38 @@ class CustomerController extends Controller
         $claim->client_id = $client->id;
         $claim->save();
         $success = true;
-        return view('home')->with('success',$success);
+        return redirect()->route('home')->with('success',$success);
+    }
+
+    public function getAbortedClaim(){
+        $client = DB::table('clients')
+                ->where('user_id', '=', Auth::user()->id)
+                ->first();
+
+        $claims = DB::table('reclamations')
+                ->where('client_id', '=', $client->id)
+                ->where('statut', '=', "annulée")
+                ->get();
+
+        $claimsDay = DB::table('reclamations')
+                ->select('date')
+                ->distinct()
+                ->where('client_id', '=', $client->id)                
+                ->get();
+
+        return view('claim.listAborted',
+                    [
+                    'claims' => $claims,
+                    'claimsDay' =>$claimsDay
+                    ]);
+    }
+
+    public function abortClaim($id){
+        $claim = Reclamation::find($id);
+        $claim->statut = "annulée";
+        $claim->save();
+        $success = true;
+        return redirect()->route('home')->with('success', $success);
     }
 
 

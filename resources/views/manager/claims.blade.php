@@ -14,8 +14,8 @@
             <section class="content-header mt-0">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Historique</h1>
+                        <div class="col-12">
+                            <h1 class="titre">Liste des réclamations </h1>
                         </div>
                     </div>
                 </div>
@@ -30,22 +30,20 @@
                                     <span class="bg-red">{{$claimDay->date}}</span>
                                 </div>
                                 @foreach ($claims as $claim)
-                                @if (property_exists($claim, 'id'))
                                     <div>
                                         <i class="fas fa-envelope bg-blue"></i>
                                         <div class="timeline-item">
                                             <span class="time"><i class="fas fa-clock">{{$claim->created_at}}</i> </span>
                                             <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
+                                            <h3 class="text-muted "><a href="#">{{$claim->prenom}}</a></h3>
                                             <div class="timeline-body">
                                                 {{$claim->description}}
                                             </div>
                                             <div class="timeline-footer">
-                                                <a class="btn btn-primary btn-sm">Consulter</a>
-                                                <a href="{{route('customer.claim.abort',$claim->id)}}" class="btn btn-danger btn-sm">Annuler</a>
+                                                <a class="btn btn-primary btn-success btn-sm">Affecter à un technicien</a>
                                             </div>
                                         </div>
                                     </div>
-                                @endif
                                 @endforeach
                                 @endforeach
                             </div>

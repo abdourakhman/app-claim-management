@@ -30,22 +30,19 @@
                                     <span class="bg-red">{{$claimDay->date}}</span>
                                 </div>
                                 @foreach ($claims as $claim)
-                                @if (property_exists($claim, 'id'))
-                                    <div>
-                                        <i class="fas fa-envelope bg-blue"></i>
-                                        <div class="timeline-item">
-                                            <span class="time"><i class="fas fa-clock">{{$claim->created_at}}</i> </span>
-                                            <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
-                                            <div class="timeline-body">
-                                                {{$claim->description}}
-                                            </div>
-                                            <div class="timeline-footer">
-                                                <a class="btn btn-primary btn-sm">Consulter</a>
-                                                <a href="{{route('customer.claim.abort',$claim->id)}}" class="btn btn-danger btn-sm">Annuler</a>
-                                            </div>
+                                <div>
+                                    <i class="fas fa-envelope bg-blue"></i>
+                                    <div class="timeline-item">
+                                        <span class="time"><i class="fas fa-clock">{{$claim->created_at}}</i> </span>
+                                        <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
+                                        <div class="timeline-body">
+                                            {{$claim->description}}
+                                        </div>
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-sm">Consulter</a>
                                         </div>
                                     </div>
-                                @endif
+                                </div>
                                 @endforeach
                                 @endforeach
                             </div>
@@ -54,8 +51,8 @@
                 </div>
             </section>
             @endif
-            @if($claims->count() == 0)
-                <h1 class="titre mr-5 px-5">Aucune réclamation n'a été déposée !</h1>
+            @if($claimsDay->count() == 0)
+                <h1 class="titre mr-5 px-5">Aucune réclamation n'a été annulée !</h1>
             @endif
         </div>
     </div>
