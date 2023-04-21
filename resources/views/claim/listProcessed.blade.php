@@ -40,7 +40,6 @@
                                         </div>
                                         <div class="timeline-footer">
                                             <a class="btn btn-primary btn-sm">Consulter</a>
-                                            <a class="btn btn-danger btn-sm">Annuler</a>
                                         </div>
                                     </div>
                                 </div>

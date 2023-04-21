@@ -127,20 +127,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('manager.claim.affected')}}" class="nav-link">
                                     <i class="fas fa-check-square nav-icon"></i>
                                     <p style="font-size: 0.8em;">Réclamations affectées</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('manager.claim.pending')}}" class="nav-link">
                                     <i class="fas fa-spinner nav-icon"></i>
                                     <p style="font-size: 0.8em;">Réclamations en attente</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link  bg-primary">
-                                    <p style="font-size: 0.8em;">Affecter réclamation</p>
                                 </a>
                             </li>
                         </ul>

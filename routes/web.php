@@ -34,12 +34,16 @@ Route::post('/admin/updateUser', [AdminController::class, 'updateUser'])->name('
 Route::get('/customer/claims', [CustomerController::class, 'getDepositClaim'])->name('customer.claim.deposit');
 Route::get('/customer/claims/processed', [CustomerController::class, 'getProcessedClaim'])->name('customer.claim.processed');
 Route::get('/customer/claims/aborted', [CustomerController::class, 'getAbortedClaim'])->name('customer.claim.aborted');
-Route::get('/customer/claims/aborted/{id}', [CustomerController::class, 'abortClaim'])->name('customer.claim.abort')->where('id', '[0-9]+');;
+Route::get('/customer/claims/aborted/{id}', [CustomerController::class, 'abortClaim'])->name('customer.claim.abort')->where('id', '[0-9]+');
 Route::get('/customer/newClaim', [CustomerController::class, 'createClaim'])->name('customer.claim.create');
 Route::post('/customer/saveClaim', [CustomerController::class, 'saveClaim'])->name('customer.claim.save');
 
 //manager
 Route::get('/manager/claims', [ManagerController::class, 'getClaims'])->name('manager.claim.getAll');
+Route::get('/manager/claims/affected', [ManagerController::class, 'getAffectedClaims'])->name('manager.claim.affected');
+Route::get('/manager/claims/pending', [ManagerController::class, 'getPendingClaims'])->name('manager.claim.pending'); //en attente
+Route::get('/manager/claims/affected/{id}', [ManagerController::class, 'getFormAffectClaim'])->name('manager.claim.getFormAffect')->where('id', '[0-9]+');
+Route::post('/manager/affectClaim', [ManagerController::class, 'affectClaim'])->name('manager.claim.affect');
 
 
 

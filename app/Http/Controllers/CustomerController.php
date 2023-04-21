@@ -44,6 +44,7 @@ class CustomerController extends Controller
 
         $claims = DB::table('reclamations')
                 ->where('client_id', '=', $client->id)
+                ->where('statut', '=', 'en cours')
                 ->get();
 
         $claimsDay = DB::table('reclamations')
