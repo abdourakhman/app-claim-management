@@ -2,28 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reclamation;
+use App\Models\User;
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ManagerController extends Controller
 {
     public function getClaims(){
-        $claims = DB::table('reclamations')
-        ->select('reclamations.id', 'reclamations.designation', 'reclamations.description', 'reclamations.statut', 'reclamations.date', 'reclamations.client_id', 'reclamations.created_at', 'users.prenom')
-        ->leftJoin('clients', 'reclamations.client_id', '=', 'clients.id')
-        ->leftJoin('users', 'clients.user_id', '=', 'users.id')
-        ->where('reclamations.statut', '=', 'déposée')
-        ->orWhere('reclamations.statut', '=', 'en cours')
+        //Requête 1
+        $reclamations = DB::table('users as u')
+        ->join('clients as c', 'c.user_id', '=', 'u.id')
+        ->join('reclamations as r', 'c.id', '=', 'r.client_id')
+        ->select('r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id')
+        ->where(function($query){
+            $query->where('r.statut', '=', 'en cours')
+                ->orWhere('r.statut', '=', 'déposée');
+        })
+        ->where('u.profil', '=', 'client')
         ->get();
-        $claimsDay = DB::table('reclamations')
-                  ->select('date')
-                  ->distinct()
-                  ->where('statut', '=', 'déposée')  
-                  ->orWhere('statut', '=', 'en cours')
-                  ->get();
-        return view('manager.claims',['claims' => $claims ,'claimsDay' => $claimsDay]);
-        //JE VEUX RECUPERER LES RECLAMATIONS PAR CLIENT EN UTILISANT LES RELATIONS
-    }
-    
+
+        // Requête 2
+        $clients = DB::table('users as u')
+            ->join('clients as c', 'c.user_id', '=', 'u.id')
+            ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
+            ->where('u.profil', '=', 'client')
+            ->get();
+        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations]);
+    } 
+
 }
