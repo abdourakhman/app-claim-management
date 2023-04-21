@@ -151,19 +151,19 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link  ">
+                                <a href="{{route('manager.technicien.list')}}" class="nav-link  ">
                                     <i class="fas fa-list nav-icon"></i>
                                     <p style="font-size: 0.8em;">Listes des agents</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link ">
+                                <a href="{{route('manager.technicien.disponible')}}" class="nav-link ">
                                     <i class="fas fa-users nav-icon"></i>
                                     <p style="font-size: 0.8em;">Agents disponibles</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('manager.technicien.indisponible')}}" class="nav-link">
                                     <i class="fas fa-location-arrow nav-icon"></i>
                                     <p style="font-size: 0.8em;">Agents en mission</p>
                                 </a>

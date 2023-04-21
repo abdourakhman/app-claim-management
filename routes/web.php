@@ -45,6 +45,11 @@ Route::get('/manager/claims/pending', [ManagerController::class, 'getPendingClai
 Route::get('/manager/claims/affected/{id}', [ManagerController::class, 'getFormAffectClaim'])->name('manager.claim.getFormAffect')->where('id', '[0-9]+');
 Route::post('/manager/affectClaim', [ManagerController::class, 'affectClaim'])->name('manager.claim.affect');
 
+//manager-technicien
+Route::get('/manager/techniciens', [ManagerController::class, 'getListTechniciens'])->name('manager.technicien.list');
+Route::get('/manager/techniciens/disponible', [ManagerController::class, 'getTechniciensDisponible'])->name('manager.technicien.disponible');
+Route::get('/manager/techniciens/indisponible', [ManagerController::class, 'getTechniciensIndisponible'])->name('manager.technicien.indisponible');
+
 
 
 

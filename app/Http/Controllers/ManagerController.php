@@ -81,4 +81,18 @@ class ManagerController extends Controller
         return view('manager.pendingClaims', ['clients' => $clients, 'reclamations' => $reclamations]);
     }
 
+    public function getListTechniciens(){
+        $techniciens = Technicien::with('user')->where('id', '!=', 0)->get();
+        return view('manager.technicien.list')->with('techniciens', $techniciens);
+    }
+
+    public function getTechniciensDisponible(){
+        $techniciens = Technicien::with('user')->where('disponibilite', '=', 1)->get();
+        return view('manager.technicien.disponible')->with('techniciens', $techniciens);
+    }
+
+    public function getTechniciensIndisponible(){
+        $techniciens = Technicien::with('user')->where('disponibilite', '!=', 1)->get();
+        return view('manager.technicien.indisponible')->with('techniciens', $techniciens);
+    }
 }
