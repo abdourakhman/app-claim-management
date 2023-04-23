@@ -53,6 +53,7 @@ Route::get('/manager/techniciens/indisponible', [ManagerController::class, 'getT
 
 //technicien
 Route::get('/technicien/interventions', [TechnicienController::class, 'getInterventions'])->name('technicien.list.interventions');
+Route::get('/technicien/solveClaim/{id}', [TechnicienController::class, 'solveClaim'])->name('technicien.claim.solve')->where('id', '[0-9]+');
 
 
 

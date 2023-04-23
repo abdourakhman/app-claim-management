@@ -10,7 +10,18 @@ use Illuminate\Support\Facades\Auth;
 class TechnicienController extends Controller
 {
     public function getInterventions(){
-        $technicien = Technicien::where('user_id',Auth::user()->id)->first();
+        $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
         return view('technicien.interventions')->with('technicien',$technicien);
     }
+
+    public function solveClaim($id){
+        $intervention = Intervention::with('reclamation')->where('id', $id)->first();
+        $intervention->statut = "en cours";
+        $intervention->reclamation->statut="clôturée";
+        $intervention->reclamation->save();
+        $intervention->save();
+        $success = true;
+        return redirect()->route('home')->with('success',$success);
+    }
 }
+
