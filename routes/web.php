@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\TechnicienController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@ Route::post('/manager/affectClaim', [ManagerController::class, 'affectClaim'])->
 Route::get('/manager/techniciens', [ManagerController::class, 'getListTechniciens'])->name('manager.technicien.list');
 Route::get('/manager/techniciens/disponible', [ManagerController::class, 'getTechniciensDisponible'])->name('manager.technicien.disponible');
 Route::get('/manager/techniciens/indisponible', [ManagerController::class, 'getTechniciensIndisponible'])->name('manager.technicien.indisponible');
+
+//technicien
+Route::get('/technicien/interventions', [TechnicienController::class, 'getInterventions'])->name('technicien.list.interventions');
 
 
 

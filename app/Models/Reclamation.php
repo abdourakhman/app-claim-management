@@ -6,6 +6,7 @@ use App\Models\Type;
 use App\Models\Client;
 use App\Models\Technicien;
 use App\Models\Gestionnaire;
+use App\Models\Intervention;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -28,4 +29,9 @@ class Reclamation extends Model
     public function techniciens(){
         return $this->belongsToMany(Technicien::class)->withPivot('date');
     }
+
+    public function interventions(){
+        return $this->hasMany(Intervention::class);
+    }
+
 }

@@ -15,7 +15,7 @@
                 <div class="container-fluid">
                     <div class="row ">
                         <div class="col-12">
-                            <h1 class="titre">Liste des réclamations en cours </h1>
+                            <h1 class="titre">Liste des réclamations en attente </h1>
                         </div>
                     </div>
                 </div>
@@ -40,10 +40,10 @@
                                             <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
                                             <div class="timeline-body">
                                                 <div><span class="badge badge-danger float-right">{{$claim->statut}}</span></div>
-                                                {{$claim->description}} {{$claim->claim_id}}
+                                                {{$claim->description}}
                                             </div>
                                             <div class="timeline-footer">
-                                                @if ($claim->statut == "déposée")    
+                                                @if ($claim->statut == "en attente")    
                                                 <a class=" btn btn-primary btn-success btn-sm" href="{{route('manager.claim.getFormAffect',$claim->claim_id)}}">Affecter à un technicien</a>
                                                 @endif 
                                             </div>
@@ -58,7 +58,7 @@
                 </div>
             </section>
             @endif
-            @if($clients->count() == 0)
+            @if ($reclamations->where('client_id',$client->id)->count() ==0 )   
                 <h1 class="titre mr-5 px-5">Aucune réclamation en attente de validation !</h1>
             @endif
         </div>

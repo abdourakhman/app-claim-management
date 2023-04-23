@@ -51,7 +51,7 @@
                 </div>
             </section>
             @endif
-            @if($claimsDay->count() == 0)
+            @if($claims->count() == 0)
                 <h1 class="titre mr-5 px-5">Aucune réclamation n'a été annulée !</h1>
             @endif
         </div>

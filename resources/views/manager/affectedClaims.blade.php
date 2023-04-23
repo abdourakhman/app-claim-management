@@ -43,7 +43,7 @@
                                                 {{$claim->description}} {{$claim->claim_id}}
                                             </div>
                                             <div class="timeline-footer">
-                                                @if ($claim->statut == "déposée")    
+                                                @if ($claim->statut == "en attente")    
                                                 <a class=" btn btn-primary btn-success btn-sm" href="{{route('manager.claim.getFormAffect',$claim->claim_id)}}">Affecter à un technicien</a>
                                                 @endif 
                                             </div>
@@ -58,7 +58,7 @@
                 </div>
             </section>
             @endif
-            @if($clients->count() == 0)
+            @if ($reclamations->where('client_id',$client->id)->count() ==0 )   
                 <h1 class="titre mr-5 px-5">Aucune réclamation en cours de traitement !</h1>
             @endif
         </div>

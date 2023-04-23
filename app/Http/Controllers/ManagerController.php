@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\Technicien;
 use App\Models\Reclamation;
+use App\Models\Intervention;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerController extends Controller
 {
@@ -18,7 +20,7 @@ class ManagerController extends Controller
         ->join('reclamations as r', 'r.client_id', '=', 'c.id')
         ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
         ->where('u.profil', '=', 'client')
-        ->whereIn('r.statut', ['en cours', 'déposée'])
+        ->whereIn('r.statut', ['en cours', 'en attente'])
         ->get();
 
         // Requête 2
@@ -27,6 +29,7 @@ class ManagerController extends Controller
             ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
             ->where('u.profil', '=', 'client')
             ->get();
+
         return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations]);
     } 
 
@@ -37,9 +40,19 @@ class ManagerController extends Controller
     }
 
     public function affectClaim(Request $request){
-        $reclamation = Reclamation::find($request->id);
+        $reclamation = Reclamation::with('client')->where('id',$request->id)->first();
+        $reclamation->gestionnaire_id = Auth::user()->gestionnaire->id;
         $reclamation->statut = 'en cours';
+
+        $intervention = new Intervention;
+        $intervention->libelle = $reclamation->designation." à ".$reclamation->client->user->adresse." chez ".$reclamation->client->user->prenom. " ".$reclamation->client->user->nom."\nTel: ".$reclamation->client->user->telephone;
+        $intervention->statut = 'en attente';
+        $intervention->reclamation_id = $reclamation->id;
         $reclamation->save();
+        $intervention->save();
+
+        $technicien = Technicien::find($request->technicien);
+        $technicien->interventions()->attach($intervention->id,['date' => date('Y-m-d')]);
         $success =true;
         return redirect()->route('home')->with('success',$success);
     }
@@ -69,7 +82,7 @@ class ManagerController extends Controller
         ->join('reclamations as r', 'r.client_id', '=', 'c.id')
         ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
         ->where('u.profil', '=', 'client')
-        ->where('r.statut', 'déposée')
+        ->where('r.statut', 'en attente')
         ->get();
 
         // Requête 2

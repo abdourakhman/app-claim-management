@@ -184,7 +184,7 @@
                         </a>
                         <ul class="nav nav-treeview" style="display: block;">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('technicien.list.interventions')}}" class="nav-link">
                                     <i class="fas fa-list-alt nav-icon"></i>
                                     <p style="font-size: 0.8em;">Listes des interventions</p>
                                 </a>

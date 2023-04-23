@@ -20,14 +20,14 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->select('id','designation','description', 'date', 'created_at')
                 ->where('client_id', '=', $client->id)
-                ->where('statut', '=', 'déposée')
+                ->where('statut', '=', 'en attente')
                 ->get();
 
         $claimsDay = DB::table('reclamations')
                 ->select('date')
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
-                ->where('statut', '=', 'déposée')
+                ->where('statut', '=', 'en attente')
                 ->get();
 
         return view('claim.list',

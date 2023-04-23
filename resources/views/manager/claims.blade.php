@@ -26,10 +26,12 @@
                         <div class="col-md-12">
                             <div class="timeline">
                                 @foreach($clients as $client)     
+                                @if ($reclamations->where('client_id',$client->id)->count() !=0 )   
                                 <div class="time-label">
                                     <img src="{{Storage::url($client->photo_url)}}" class="img-circle elevation-2" alt="User Image" style="max-width:50px; heigth:10px;"> 
                                     <h5 class="text-secondary">{{$client->prenom}} {{$client->nom}} </h5>   
                                 </div>
+                                @endif
                                 @foreach ($reclamations->where('client_id', $client->id) as $claim)
                                     <div>
                                         <i class="fas fa-exclamation bg-red"></i>
@@ -41,7 +43,7 @@
                                                 {{$claim->description}} {{$claim->claim_id}}
                                             </div>
                                             <div class="timeline-footer">
-                                                @if ($claim->statut == "déposée")    
+                                                @if ($claim->statut == "en attente")    
                                                 <a class=" btn btn-primary btn-success btn-sm" href="{{route('manager.claim.getFormAffect',$claim->claim_id)}}">Affecter à un technicien</a>
                                                 @endif 
                                             </div>
@@ -56,8 +58,8 @@
                 </div>
             </section>
             @endif
-            @if($clients->count() == 0)
-                <h1 class="titre mr-5 px-5">Aucune réclamation n'a été déposée !</h1>
+            @if ($reclamations->where('client_id',$client->id)->count() ==0 )   
+            <h1 class="titre mr-5 px-5">Aucune réclamation n'a été déposée !</h1>
             @endif
         </div>
     </div>
