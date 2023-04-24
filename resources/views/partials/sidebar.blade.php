@@ -190,15 +190,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('technicien.interventions.solved')}}" class="nav-link">
                                     <i class="fas fa-check nav-icon"></i>
                                     <p style="font-size: 0.8em;">Interventions clôturées</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link">
+                                <a href="{{route('technicien.interventions.pending')}}" class="nav-link">
                                     <i class="fas fa-times nav-icon"></i>
-                                    <p style="font-size: 0.8em;">Interventions annulées</p>
+                                    <p style="font-size: 0.8em;">Interventions à résoudre</p>
                                 </a>
                             </li>
                         </ul>

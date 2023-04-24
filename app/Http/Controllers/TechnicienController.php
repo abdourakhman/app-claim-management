@@ -23,5 +23,15 @@ class TechnicienController extends Controller
         $success = true;
         return redirect()->route('home')->with('success',$success);
     }
+
+    public function getSolvedInterventions(){
+        $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
+        return view('technicien.solved')->with('technicien',$technicien);
+    }
+
+    public function getPendingInterventions(){
+        $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
+        return view('technicien.notSolved')->with('technicien',$technicien);
+    }
 }
 
