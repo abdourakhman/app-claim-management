@@ -37,6 +37,8 @@ Route::get('/customer/claims/processed', [CustomerController::class, 'getProcess
 Route::get('/customer/claims/aborted', [CustomerController::class, 'getAbortedClaim'])->name('customer.claim.aborted');
 Route::get('/customer/claims/aborted/{id}', [CustomerController::class, 'abortClaim'])->name('customer.claim.abort')->where('id', '[0-9]+');
 Route::get('/customer/newClaim', [CustomerController::class, 'createClaim'])->name('customer.claim.create');
+Route::get('/customer/interventions/resolved/{id}', [CustomerController::class, 'getResolvedInterventions'])->name('customer.interventions.resolved')->where('id', '[0-9]+');
+Route::get('/customer/interventions/failed/{id}', [CustomerControllerController::class, 'getFailedInterventions'])->name('customer.interventions.failed')->where('id', '[0-9]+');
 Route::post('/customer/saveClaim', [CustomerController::class, 'saveClaim'])->name('customer.claim.save');
 
 //manager

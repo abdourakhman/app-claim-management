@@ -38,9 +38,17 @@
                                         <div class="timeline-body">
                                             {{$claim->description}}
                                         </div>
+                                        @if ($claim->statut == "clôturée")    
                                         <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">Consulter</a>
+                                            <a  href="{{route('customer.interventions.resolved',$claim->id)}}" class="btn btn-success btn-sm">intervention réussie <i class="fas fa-thumbs-up"></i></a>
+                                            <a class="btn btn-danger btn-sm float-right">intervention échouée <i class="fas fa-thumbs-down"></i></a>
                                         </div>
+                                       
+                                        @else
+                                        <div class="timeline-footer">
+                                            <a class="btn btn-primary btn-sm">consulter</a>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                                 @endforeach

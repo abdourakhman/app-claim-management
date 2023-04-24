@@ -45,6 +45,7 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->where('client_id', '=', $client->id)
                 ->where('statut', '=', 'en cours')
+                ->orWhere('statut', '=', 'clôturée')
                 ->get();
 
         $claimsDay = DB::table('reclamations')
@@ -52,6 +53,7 @@ class CustomerController extends Controller
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
                 ->where('statut', '=', 'en cours')
+                ->orWhere('statut', '=', 'clôturée')
                 ->get();
 
         return view('claim.listProcessed',
@@ -59,6 +61,28 @@ class CustomerController extends Controller
                     'claims' => $claims,
                     'claimsDay' =>$claimsDay
                     ]);
+    }
+
+    public function getResolvedInterventions($id){
+        $reclamation = Reclamation::with('interventions')->where('id', $id)->first();
+        foreach($reclamation->interventions() as $intervention){
+                if($intervention->reclamation_id == $id){
+                        $intervention->statut = "résolue";
+                        $intervention->save();
+                }
+        }
+        return redirect()->route('customer.claim.processed');
+    }
+    
+    public function getFailedInterventions($id){
+        $reclamation = Reclamation::with('interventions')->where('id', $id)->first();
+        foreach($reclamation->interventions() as $intervention){
+                if($intervention->reclamation_id == $id){
+                        $intervention->statut = "échouée";
+                        $intervention->save();
+                }
+        }
+        return redirect()->route('customer.claim.processed');
     }
 
     public function createClaim(){
