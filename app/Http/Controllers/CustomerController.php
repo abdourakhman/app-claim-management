@@ -65,12 +65,14 @@ class CustomerController extends Controller
 
     public function getResolvedInterventions($id){
         $reclamation = Reclamation::with('interventions')->where('id', $id)->first();
-        foreach($reclamation->interventions() as $intervention){
+        foreach($reclamation->interventions as $intervention){
                 if($intervention->reclamation_id == $id){
                         $intervention->statut = "résolue";
                         $intervention->save();
                 }
         }
+        $reclamation->statut = "résolue";
+        $reclamation->save();
         return redirect()->route('customer.claim.processed');
     }
     
