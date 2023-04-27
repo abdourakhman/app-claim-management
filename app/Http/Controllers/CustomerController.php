@@ -29,11 +29,12 @@ class CustomerController extends Controller
                 ->where('client_id', '=', $client->id)                
                 ->where('statut', '=', 'en attente')
                 ->get();
-
+        $title = "reclamations";
         return view('claim.list',
                     [
                     'claims' => $claims,
-                    'claimsDay' =>$claimsDay
+                    'claimsDay' => $claimsDay,
+                    'title' => $title
                     ]);
     }
 
@@ -55,11 +56,13 @@ class CustomerController extends Controller
                 ->where('statut', '=', 'en cours')
                 ->orWhere('statut', '=', 'clôturée')
                 ->get();
+        $title = "reclamations";
 
         return view('claim.listProcessed',
                     [
                     'claims' => $claims,
-                    'claimsDay' =>$claimsDay
+                    'claimsDay' => $claimsDay,
+                    'title' => $title
                     ]);
     }
 
@@ -130,11 +133,14 @@ class CustomerController extends Controller
                 ->where('client_id', '=', $client->id)                
                 ->where('statut', '=', "annulée")
                 ->get();
-
+        
+        $title = 'reclamations';
+        
         return view('claim.listAborted',
                     [
                     'claims' => $claims,
-                    'claimsDay' =>$claimsDay
+                    'claimsDay' => $claimsDay,
+                    'title' => $title
                     ]);
     }
 
