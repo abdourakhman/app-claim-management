@@ -4,6 +4,7 @@
 @section('content')
 <div class="content-wrapper" style="min-height:112px;">
     <section class="content">
+        <h1 class="titre mb-3 badge badge-info">LISTE DES INTERVENTIONS</h1>
         <div class="card-body pb-0">
             <div class="row">
                 <div class="col-12 d-flex align-items-stretch flex-column">

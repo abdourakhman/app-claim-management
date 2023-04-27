@@ -40,7 +40,7 @@
                                             <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
                                             <div class="timeline-body">
                                                 <div><span class="badge badge-danger float-right">{{$claim->statut}}</span></div>
-                                                {{$claim->description}} {{$claim->claim_id}}
+                                                {{$claim->description}} 
                                             </div>
                                             <div class="timeline-footer">
                                                 @if ($claim->statut == "en attente")    

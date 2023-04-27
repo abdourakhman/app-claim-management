@@ -15,6 +15,9 @@ class TechnicienController extends Controller
     }
 
     public function solveClaim($id){
+        $technicien  = Technicien::where('user_id', Auth::user()->id)->first();
+        $technicien->disponibilite = 0;
+        $technicien->save();
         $intervention = Intervention::with('reclamation')->where('id', $id)->first();
         $intervention->statut = "en cours";
         $intervention->reclamation->statut="clôturée";

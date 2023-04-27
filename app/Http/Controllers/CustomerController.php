@@ -67,6 +67,10 @@ class CustomerController extends Controller
         $reclamation = Reclamation::with('interventions')->where('id', $id)->first();
         foreach($reclamation->interventions as $intervention){
                 if($intervention->reclamation_id == $id){
+                        foreach($intervention->techniciens as $technicien){
+                                $technicien->disponibilite = 1;
+                                $technicien->save();
+                        }
                         $intervention->statut = "résolue";
                         $intervention->save();
                 }
@@ -78,12 +82,18 @@ class CustomerController extends Controller
     
     public function getFailedInterventions($id){
         $reclamation = Reclamation::with('interventions')->where('id', $id)->first();
-        foreach($reclamation->interventions() as $intervention){
+        foreach($reclamation->interventions as $intervention){
                 if($intervention->reclamation_id == $id){
+                        foreach($intervention->techniciens as $technicien){
+                                $technicien->disponibilite = 1;
+                                $technicien->save();
+                        }
                         $intervention->statut = "échouée";
                         $intervention->save();
                 }
         }
+        $reclamation->statut = "échouée";
+        $reclamation->save();
         return redirect()->route('customer.claim.processed');
     }
 
