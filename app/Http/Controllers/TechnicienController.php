@@ -11,7 +11,7 @@ class TechnicienController extends Controller
 {
     public function getInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.interventions')->with('technicien',$technicien);
+        return view('technicien.interventions',['technicien'=> $technicien, 'title'=>"technicien"]);
     }
 
     public function solveClaim($id){
@@ -29,12 +29,12 @@ class TechnicienController extends Controller
 
     public function getSolvedInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.solved')->with('technicien',$technicien);
+        return view('technicien.solved',['technicien'=> $technicien, 'title'=>"technicien"]);
     }
 
     public function getPendingInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.notSolved')->with('technicien',$technicien);
+        return view('technicien.notSolved',['technicien'=> $technicien, 'title'=>"technicien"]);
     }
 }
 

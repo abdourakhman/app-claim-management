@@ -30,13 +30,13 @@ class ManagerController extends Controller
             ->where('u.profil', '=', 'client')
             ->get();
 
-        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations]);
+        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims"]);
     } 
 
     public function getFormAffectClaim($id){
         $techniciens = Technicien::where('disponibilite',1)->get();
         $claim = Reclamation::findOrFail($id);
-        return view('manager.formAffect',['claim'=>$claim,'techniciens'=>$techniciens]); 
+        return view('manager.formAffect',['claim'=>$claim,'techniciens'=>$techniciens,'title'=>"Manager|claims"]); 
     }
 
     public function affectClaim(Request $request){
@@ -72,7 +72,7 @@ class ManagerController extends Controller
             ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
             ->where('u.profil', '=', 'client')
             ->get();
-        return view('manager.affectedClaims', ['clients' => $clients, 'reclamations' => $reclamations]);
+        return view('manager.affectedClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims"]);
 
     }
 
@@ -91,21 +91,21 @@ class ManagerController extends Controller
             ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
             ->where('u.profil', '=', 'client')
             ->get();
-        return view('manager.pendingClaims', ['clients' => $clients, 'reclamations' => $reclamations]);
+        return view('manager.pendingClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims"]);
     }
 
     public function getListTechniciens(){
         $techniciens = Technicien::with('user')->where('id', '!=', 0)->get();
-        return view('manager.technicien.list')->with('techniciens', $techniciens);
+        return view('manager.technicien.list',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
     }
 
     public function getTechniciensDisponible(){
         $techniciens = Technicien::with('user')->where('disponibilite', '=', 1)->get();
-        return view('manager.technicien.disponible')->with('techniciens', $techniciens);
+        return view('manager.technicien.disponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
     }
 
     public function getTechniciensIndisponible(){
         $techniciens = Technicien::with('user')->where('disponibilite', '!=', 1)->get();
-        return view('manager.technicien.indisponible')->with('techniciens', $techniciens);
+        return view('manager.technicien.indisponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
     }
 }
