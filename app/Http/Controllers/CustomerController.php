@@ -116,6 +116,7 @@ class CustomerController extends Controller
                 ->select('date')
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
+                ->where('statut', '=', "annulée")
                 ->get();
 
         return view('claim.listAborted',
