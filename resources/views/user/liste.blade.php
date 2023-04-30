@@ -13,8 +13,8 @@
             <div class="card  card-outline " style="border-top: 6px solid rgb(47 65 117);">
                 <div class="card-header text-center text-gray font-weight-bold">{{ __('LES UTILISATEURS DU SYSTEME') }}</div>
                 <div class="card-body">
-                    <form class="form-inline my-2 float-right ">
-                            <input class="form-control mr-sm-2" type="search" placeholder="..." aria-label="Search">
+                    <form method="GET" action="{{route('admin.search')}}" class="form-inline my-2 float-right ">
+                            <input class="form-control mr-sm-2" type="text" name="term" placeholder="..." aria-label="Search">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Chercher</button>
                       </form>
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">

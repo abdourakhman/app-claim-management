@@ -20,9 +20,19 @@
                     <i class="fas fa-search"></i>
                 </a>
                 <div class="navbar-search-block">
-                    <form class="form-inline">
+                    <form 
+                        class="form-inline"
+                        method="GET"
+                        @if (Auth::user()->profil == "client")
+                            action="{{route('customer.search')}}"
+                        @elseif(Auth::user()->profil == "gestionnaire")
+                            action="{{route('manager.search')}}"
+                        @else
+                        action='/'
+                        @endif
+                    >
                         <div class="input-group input-group-sm">
-                            <input class="form-control form-control-navbar  offset-4 col-4" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control form-control-navbar  offset-4 col-4" type="text" name="term" placeholder="Search" aria-label="Search">
                             <div class="input-group-append">
                                 <button class="btn btn-navbar" type="submit">
                                     <i class="fas fa-search"></i>

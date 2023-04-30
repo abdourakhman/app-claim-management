@@ -175,4 +175,12 @@ class AdminController extends Controller
         $success = true;
         return  view('home')->with('success',$success);
     }
+    public function searchUser(Request $request){
+        $users = User::where('prenom','like', '%'.$request->term.'%')
+        ->orwhere('id','=', $request->term)
+        ->orwhere('email','=', $request->term)
+        ->orwhere('profil','=', $request->term)
+        ->orwhere('nom','like', '%'.$request->term.'%')->get();
+        return view('user.liste')->with('users', $users);
+    }
 }

@@ -36,5 +36,6 @@ class TechnicienController extends Controller
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
         return view('technicien.notSolved',['technicien'=> $technicien, 'title'=>"technicien"]);
     }
+    
 }
 

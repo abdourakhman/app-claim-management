@@ -108,4 +108,25 @@ class ManagerController extends Controller
         $techniciens = Technicien::with('user')->where('disponibilite', '!=', 1)->get();
         return view('manager.technicien.indisponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
     }
+
+    public function searchClaim(Request $request){
+        //Requête 1
+        $reclamations = DB::table('clients as c')
+        ->join('users as u', 'u.id', '=', 'c.user_id')
+        ->join('reclamations as r', 'r.client_id', '=', 'c.id')
+        ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
+        ->where('u.profil', '=', 'client')
+        ->whereIn('r.statut', ['en cours', 'en attente'])
+        ->orwhere('designation','=', $request->term)
+        ->orwhere('description','like', '%'.$request->term.'%')->get();
+
+        // Requête 2
+        $clients = DB::table('users as u')
+            ->join('clients as c', 'c.user_id', '=', 'u.id')
+            ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
+            ->where('u.profil', '=', 'client')
+            ->get();
+
+        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims"]);
+    } 
 }

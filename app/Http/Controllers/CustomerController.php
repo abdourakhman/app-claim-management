@@ -152,5 +152,31 @@ class CustomerController extends Controller
         return redirect()->route('home')->with('success', $success);
     }
 
+    public function searchClaim(Request $request){
+        $client = DB::table('clients')
+        ->where('user_id', '=', Auth::user()->id)
+        ->first();
 
+        $claims = DB::table('reclamations')
+                ->select('id','designation','description', 'date', 'created_at')
+                ->where('client_id', '=', $client->id)                
+                ->orwhere('designation', $request->term)
+                ->orwhere('id','=', $request->term)
+                ->get();
+
+        $claimsDay = DB::table('reclamations')
+                ->select('date')
+                ->distinct()
+                ->where('client_id', '=', $client->id)                
+                ->orwhere('designation', $request->term)
+                ->orwhere('id','=', $request->term)
+                ->get();
+        $title = "reclamations";
+        return view('claim.search',
+                [
+                'claims' => $claims,
+                'claimsDay' => $claimsDay,
+                'title' => $title
+                ]); 
+    }
 }

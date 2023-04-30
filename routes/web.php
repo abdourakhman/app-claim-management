@@ -19,9 +19,11 @@ use App\Http\Controllers\TechnicienController;
 */
 
 Auth::routes();
-//admin
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+
+//admin
+Route::get('/admin/search', [AdminController::class, 'searchUser'])->name('admin.search');
 Route::get('/admin/createUser', [AdminController::class, 'createUser'])->name('admin.user.create');
 Route::get('/admin/deleteUser', [AdminController::class, 'deleteUser'])->name('admin.user.delete');
 Route::get('/admin/deleteUser/{user}', [AdminController::class, 'removeUser'])->name('admin.user.remove');
@@ -32,6 +34,7 @@ Route::post('/admin/saveUser', [AdminController::class, 'saveUser'])->name('admi
 Route::post('/admin/updateUser', [AdminController::class, 'updateUser'])->name('admin.user.update');
 
 //customer
+Route::get('/customer/search', [CustomerController::class, 'searchClaim'])->name('customer.search');
 Route::get('/customer/claims', [CustomerController::class, 'getDepositClaim'])->name('customer.claim.deposit');
 Route::get('/customer/claims/processed', [CustomerController::class, 'getProcessedClaim'])->name('customer.claim.processed');
 Route::get('/customer/claims/aborted', [CustomerController::class, 'getAbortedClaim'])->name('customer.claim.aborted');
@@ -42,6 +45,7 @@ Route::get('/customer/interventions/failed/{id}', [CustomerControllerController:
 Route::post('/customer/saveClaim', [CustomerController::class, 'saveClaim'])->name('customer.claim.save');
 
 //manager
+Route::get('/manager/search', [ManagerController::class, 'searchClaim'])->name('manager.search');
 Route::get('/manager/claims', [ManagerController::class, 'getClaims'])->name('manager.claim.getAll');
 Route::get('/manager/claims/affected', [ManagerController::class, 'getAffectedClaims'])->name('manager.claim.affected');
 Route::get('/manager/claims/pending', [ManagerController::class, 'getPendingClaims'])->name('manager.claim.pending'); //en attente
