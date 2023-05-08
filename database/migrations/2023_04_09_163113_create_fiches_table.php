@@ -17,7 +17,7 @@ class CreateFichesTable extends Migration
             $table->id();
             $table->string("titre");
             $table->text("detail");
-            $table->text("suggestion");
+            $table->text("suggestion")->nullable();
             $table->foreignId('technicien_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });

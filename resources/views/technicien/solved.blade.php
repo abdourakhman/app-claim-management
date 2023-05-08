@@ -39,7 +39,7 @@
                        </div>
                        <div class="card-footer">
                            <div class="text-right">
-                            <a href="{{route('technicien.claim.solve',$intervention->id)}}" class="btn btn-sm btn-primary">
+                            <a href="{{route('technicien.fill.form',$intervention->id)}}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-pencil"></i> remplir la fiche d'intervention
                             </a>
                            </div>

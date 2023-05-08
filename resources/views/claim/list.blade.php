@@ -35,13 +35,12 @@
                                         <i class="fas fa-envelope bg-blue"></i>
                                         <div class="timeline-item">
                                             <span class="time"><i class="fas fa-clock">{{$claim->created_at}}</i> </span>
-                                            <h3 class="timeline-header"><a href="#">{{$claim->designation}}</a></h3>
+                                            <h3 class="timeline-header"><a href="#">{{$claim->designation}} <p class="text-end p-0 m-0 "><a href="#" class="badge badge-secondary">{{$claim->statut}}</a></a></p></h3>
                                             <div class="timeline-body">
                                                 {{$claim->description}}
                                             </div>
                                             <div class="timeline-footer">
-                                                <a class="btn btn-primary btn-sm">Consulter</a>
-                                                <a href="{{route('customer.claim.abort',$claim->id)}}" class="btn btn-danger btn-sm">Annuler</a>
+                                                <a href="{{route('customer.claim.abort',$claim->id)}}" class="btn btn-danger btn-sm offset-11">Annuler</a>
                                             </div>
                                         </div>
                                     </div>

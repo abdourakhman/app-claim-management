@@ -10,6 +10,8 @@ class Fiche extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['titre', 'detail', 'suggestion','technicien_id'];
+
     public function technicien(){
         return $this->belongsTo(Technicien::class);
     }

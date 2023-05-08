@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Fiche;
 use App\Models\Technicien;
 use App\Models\Intervention;
 use Illuminate\Http\Request;
@@ -37,5 +38,24 @@ class TechnicienController extends Controller
         return view('technicien.notSolved',['technicien'=> $technicien, 'title'=>"technicien"]);
     }
     
+    public function fillForm($id){
+        $intervention = Intervention::with('reclamation')->where('id',$id)->first();
+        return view('technicien.fillForm',['intervention' => $intervention, 'title'=>"technicien"]);
+    }
+
+    public function saveForm(Request $request){
+        $technicien = Technicien::where('user_id',$request->user_id)->first();
+        $intervention = Intervention::find($request->intervention_id);
+        $intervention->statut = "clôturée";
+        $intervention->save();
+        Fiche::create([
+            'titre' => $request->designation,
+            'detail' => $request->detail,
+            'suggestion' => $request->suggestion,
+            'technicien_id' => $technicien->id
+        ]);
+        $success = true;
+        return redirect()->route('home')->with('success',$success);
+    }
 }
 

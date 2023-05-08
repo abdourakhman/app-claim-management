@@ -18,16 +18,14 @@ class CustomerController extends Controller
                 ->first();
 
         $claims = DB::table('reclamations')
-                ->select('id','designation','description', 'date', 'created_at')
+                ->select('id','designation','description', 'date', 'created_at','statut')
                 ->where('client_id', '=', $client->id)
-                ->where('statut', '=', 'en attente')
                 ->get();
 
         $claimsDay = DB::table('reclamations')
                 ->select('date')
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
-                ->where('statut', '=', 'en attente')
                 ->get();
         $title = "reclamations";
         return view('claim.list',
@@ -45,17 +43,16 @@ class CustomerController extends Controller
 
         $claims = DB::table('reclamations')
                 ->where('client_id', '=', $client->id)
-                ->where('statut', '=', 'en cours')
-                ->orWhere('statut', '=', 'clôturée')
+                ->whereIn('statut', ['en cours', 'clôturée'])
                 ->get();
 
         $claimsDay = DB::table('reclamations')
-                ->select('date')
+                ->select('date','client_id')
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
-                ->where('statut', '=', 'en cours')
-                ->orWhere('statut', '=', 'clôturée')
+                ->whereIn('statut', ['en cours', 'clôturée'])
                 ->get();
+
         $title = "reclamations";
 
         return view('claim.listProcessed',

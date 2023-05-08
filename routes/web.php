@@ -41,7 +41,7 @@ Route::get('/customer/claims/aborted', [CustomerController::class, 'getAbortedCl
 Route::get('/customer/claims/aborted/{id}', [CustomerController::class, 'abortClaim'])->name('customer.claim.abort')->where('id', '[0-9]+');
 Route::get('/customer/newClaim', [CustomerController::class, 'createClaim'])->name('customer.claim.create');
 Route::get('/customer/interventions/resolved/{id}', [CustomerController::class, 'getResolvedInterventions'])->name('customer.interventions.resolved')->where('id', '[0-9]+');
-Route::get('/customer/interventions/failed/{id}', [CustomerControllerController::class, 'getFailedInterventions'])->name('customer.interventions.failed')->where('id', '[0-9]+');
+Route::get('/customer/interventions/failed/{id}', [CustomerController::class, 'getFailedInterventions'])->name('customer.interventions.failed')->where('id', '[0-9]+');
 Route::post('/customer/saveClaim', [CustomerController::class, 'saveClaim'])->name('customer.claim.save');
 
 //manager
@@ -59,10 +59,11 @@ Route::get('/manager/techniciens/indisponible', [ManagerController::class, 'getT
 
 //technicien
 Route::get('/technicien/interventions', [TechnicienController::class, 'getInterventions'])->name('technicien.list.interventions');
+Route::get('/technicien/fiche/form/{id}', [TechnicienController::class, 'fillForm'])->name('technicien.fill.form');
 Route::get('/technicien/interventions/solved', [TechnicienController::class, 'getSolvedInterventions'])->name('technicien.interventions.solved');
 Route::get('/technicien/interventions/pending', [TechnicienController::class, 'getPendingInterventions'])->name('technicien.interventions.pending');
 Route::get('/technicien/solveClaim/{id}', [TechnicienController::class, 'solveClaim'])->name('technicien.claim.solve')->where('id', '[0-9]+');
-
+Route::post('/technicien/fiche/save', [TechnicienController::class, 'saveForm'])->name('technicien.save.fiche');
 
 
 
