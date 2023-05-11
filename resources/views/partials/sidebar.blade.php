@@ -26,7 +26,7 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     @cannot('client')     
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route('manager.dashboard')}}" class="nav-link">
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Tableau de Bord
                                 <span class="right badge badge-danger">All</span>

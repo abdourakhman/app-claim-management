@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Auth;
 
 class ManagerController extends Controller
 {
+    public function dashboard(){
+
+        return view('manager.dashboard');
+    }
+
     public function getClaims(){
         //Requête 1
         $reclamations = DB::table('clients as c')

@@ -45,6 +45,7 @@ Route::get('/customer/interventions/failed/{id}', [CustomerController::class, 'g
 Route::post('/customer/saveClaim', [CustomerController::class, 'saveClaim'])->name('customer.claim.save');
 
 //manager
+Route::get('/manager/dashboard', [ManagerController::class, 'dashboard'])->name('manager.dashboard');
 Route::get('/manager/search', [ManagerController::class, 'searchClaim'])->name('manager.search');
 Route::get('/manager/claims', [ManagerController::class, 'getClaims'])->name('manager.claim.getAll');
 Route::get('/manager/claims/affected', [ManagerController::class, 'getAffectedClaims'])->name('manager.claim.affected');
