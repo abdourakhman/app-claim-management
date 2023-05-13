@@ -68,7 +68,7 @@
                     
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
-                            <div class="w-100 border border-secondary px-0 mx-0 shadow mb-1">
+                            <div class="">
                                 <canvas id="myChart" ></canvas>
                             </div>
                               @php
