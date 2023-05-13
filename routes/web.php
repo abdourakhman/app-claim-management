@@ -23,6 +23,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 
 //admin
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 Route::get('/admin/search', [AdminController::class, 'searchUser'])->name('admin.search');
 Route::get('/admin/createUser', [AdminController::class, 'createUser'])->name('admin.user.create');
 Route::get('/admin/deleteUser', [AdminController::class, 'deleteUser'])->name('admin.user.delete');

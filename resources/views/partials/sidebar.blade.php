@@ -26,7 +26,13 @@
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     @cannot('client')     
                     <li class="nav-item">
-                        <a href="{{route('manager.dashboard')}}" class="nav-link">
+                        @if (Auth::user()->profil == 'admin')
+                            <a href="{{route('admin.dashboard')}}" class="nav-link">
+                        @elseif(Auth::user()->profil == 'gestionnaire')  
+                            <a href="{{route('manager.dashboard')}}" class="nav-link">
+                        @else
+                        <a href="#" class="nav-link">
+                        @endif
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Tableau de Bord
                                 <span class="right badge badge-danger">All</span>

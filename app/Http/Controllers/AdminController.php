@@ -7,14 +7,38 @@ use App\Models\User;
 use App\Models\Client;
 use App\Models\Technicien;
 use App\Models\Gestionnaire;
+use App\Models\Intervention;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
-{
+{   
+    public function dashboard(){
+        $numberCustumer = User::where('profil','client')->get()->count();
+        $numberManager = User::where('profil','gestionnaire')->get()->count();
+        $numberTechnician = User::where('profil','technicien')->get()->count();
+        $numberIntervention = Intervention::count();
+
+        $registrations = DB::table(DB::raw('(SELECT DISTINCT DATE_FORMAT(created_at, "%Y-%m") as mois_annee FROM users) AS months'))
+        ->leftJoin('users', DB::raw('DATE_FORMAT(users.created_at, "%Y-%m")'), '=', DB::raw('months.mois_annee'))
+        ->select(DB::raw('months.mois_annee as mois_annee'), DB::raw('COUNT(users.id) as nombre_clients'))
+        ->where('users.profil', 'client')
+        ->groupBy(DB::raw('months.mois_annee'))
+        ->orderBy(DB::raw('months.mois_annee'))
+        ->get();
+        return view('user.admin_dashboard',
+                        ['numberCustumer'=>$numberCustumer,
+                        'numberManager'=>$numberManager,
+                        'numberTechnician'=>$numberTechnician,
+                        'numberIntervention'=>$numberIntervention,
+                        'registrations'=>$registrations
+                        ]
+                    );
+    }
     public function createUser(){
         return view('user.form');
     }
