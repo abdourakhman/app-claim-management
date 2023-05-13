@@ -35,12 +35,14 @@ class AdminController extends Controller
                         'numberManager'=>$numberManager,
                         'numberTechnician'=>$numberTechnician,
                         'numberIntervention'=>$numberIntervention,
-                        'registrations'=>$registrations
+                        'registrations'=>$registrations,
+                        'title' => 'Dashboard_admin'
                         ]
                     );
     }
     public function createUser(){
-        return view('user.form');
+                        
+                        return view('user.form',['title' => 'Admin']);
     }
 
     public function saveUser(Request $request){
@@ -124,7 +126,7 @@ class AdminController extends Controller
 
     public function deleteUser(){
         $users = User::all();
-        return view('user.delete')->with('users', $users);
+        return view('user.delete',['title' => 'Admin','users'=> $users]);
     }
 
     public function removeUser($user){
@@ -146,15 +148,15 @@ class AdminController extends Controller
 
     public function listUser(){
         $users = User::all();
-        return view('user.liste')->with('users', $users);
+        return view('user.liste',['title' => 'Admin','users'=> $users]);
     }
 
     public function editUser(){
         $users = User::all();
-        return view('user.edit')->with('users', $users);
+        return view('user.edit',['title' => 'Admin','users'=> $users]);
     }
     public function editUserform($user){
-        return view('user.editForm')->with('user',User::find($user));
+        return view('user.editForm',['title' => 'Admin','user'=> User::find($user)]);
     }
     public function updateUser(Request $request){
         $photo_url = "img/images/profil.png";
