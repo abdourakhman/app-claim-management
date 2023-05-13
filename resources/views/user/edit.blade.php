@@ -57,6 +57,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination pagination-sm">
+                            <ul >
+                                {{$users->links()}}
+                            </ul>
+                        </div>
                     </form>
                 </div>
             </div>

@@ -67,10 +67,10 @@
                     </div>
                     
                     <div class="row">
-                        <div class="col-md-12">
-                            <div>
-                                <canvas id="myChart"></canvas>
-                              </div>
+                        <div class="col-md-12 col-lg-12">
+                            <div class="w-100 border border-secondary px-0 mx-0 shadow mb-1">
+                                <canvas id="myChart" ></canvas>
+                            </div>
                               @php
                                 $moisAnnees = [];
                                 $nombreClients = [];
@@ -100,7 +100,7 @@
                                       pointBackgroundColor:'red',
                                       borderColor: '1A202C',
                                       backgroundColor:'#dfe3ec',
-                                      tension: 0.3
+                                      tension: 0.5
                                     }]
                                   },
                                   options: {

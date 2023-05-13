@@ -47,40 +47,40 @@ class AdminController extends Controller
 
     public function saveUser(Request $request){
         $success = false;
-    $default_photo_path = "img/images/profil.png";
+        $default_photo_path = "img/images/profil.png";
 
-    // Enregistrer l'image par défaut dans le système de fichiers Laravel
-    if (!Storage::disk('public')->exists($default_photo_path)) {
-        Storage::disk('public')->put($default_photo_path, file_get_contents(public_path($default_photo_path)));
-    }
-
-    $photo_url = $default_photo_path;
-
-    // Créer une instance Intervention\Image\Image à partir des données de la photo
-    if($request->photo){
-        $image = Image::make($request->photo);
-
-        // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
-        $image->fit(50, 50);
-
-        // Encoder l'image dans le format approprié en fonction de l'extension du fichier
-        if ($request->photo->extension() == 'png') {
-            $imageData = $image->encode('png', 80);
-        } elseif ($request->photo->extension() == 'gif') {
-            $imageData = $image->encode('gif');
-        } else {
-            $imageData = $image->encode('jpg', 80);
+        // Enregistrer l'image par défaut dans le système de fichiers Laravel
+        if (!Storage::disk('public')->exists($default_photo_path)) {
+            Storage::disk('public')->put($default_photo_path, file_get_contents(public_path($default_photo_path)));
         }
 
-    // Générer un nom de fichier unique pour la nouvelle image
-    $filename = uniqid('avatar_', true) . '.' . $request->photo->extension();
+        $photo_url = $default_photo_path;
 
-    // Stocker l'image dans le système de fichiers public de Laravel
-    Storage::disk('public')->put('avatars/' . $filename, $imageData);
+        // Créer une instance Intervention\Image\Image à partir des données de la photo
+        if($request->photo){
+            $image = Image::make($request->photo);
 
-    // Enregistrer l'URL de l'image dans la base de données
-    $photo_url = 'avatars/' . $filename;
-}
+            // Redimensionner l'image pour qu'elle ait une taille maximale de 50x50 pixels
+            $image->fit(50, 50);
+
+            // Encoder l'image dans le format approprié en fonction de l'extension du fichier
+            if ($request->photo->extension() == 'png') {
+                $imageData = $image->encode('png', 80);
+            } elseif ($request->photo->extension() == 'gif') {
+                $imageData = $image->encode('gif');
+            } else {
+                $imageData = $image->encode('jpg', 80);
+            }
+
+            // Générer un nom de fichier unique pour la nouvelle image
+            $filename = uniqid('avatar_', true) . '.' . $request->photo->extension();
+
+            // Stocker l'image dans le système de fichiers public de Laravel
+            Storage::disk('public')->put('avatars/' . $filename, $imageData);
+
+            // Enregistrer l'URL de l'image dans la base de données
+            $photo_url = 'avatars/' . $filename;
+        }
         $validator = Validator::make($request->all(), [
             'profil' => 'required',
             'password' => 'required',
@@ -93,7 +93,6 @@ class AdminController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
         $user = new User;
         $user->prenom = $request->prenom;
         $user->nom = $request->nom;
@@ -106,10 +105,12 @@ class AdminController extends Controller
         $user->password = Hash::make($request->password);
         $user->date_naissance = $request->naissance; 
         $user->save();
+        
         if($user->profil == 'client'){
             $user->client()->save(new Client(['CIN' =>$request->cin]));
         }
         if($user->profil == 'gestionnaire'){$user->gestionnaire()->save(new Gestionnaire);}
+        
         if($user->profil == 'technicien'){
             $technicien = $user->technicien()->save(new Technicien);
             if($request->type_eau){
@@ -125,7 +126,7 @@ class AdminController extends Controller
     }
 
     public function deleteUser(){
-        $users = User::all();
+        $users = User::paginate(5);
         return view('user.delete',['title' => 'Admin','users'=> $users]);
     }
 
@@ -147,17 +148,19 @@ class AdminController extends Controller
     }
 
     public function listUser(){
-        $users = User::all();
+        $users = User::latest()->paginate(4);
         return view('user.liste',['title' => 'Admin','users'=> $users]);
     }
 
     public function editUser(){
-        $users = User::all();
+        $users = User::paginate(5);
         return view('user.edit',['title' => 'Admin','users'=> $users]);
     }
+   
     public function editUserform($user){
         return view('user.editForm',['title' => 'Admin','user'=> User::find($user)]);
     }
+    
     public function updateUser(Request $request){
         $photo_url = "img/images/profil.png";
         // Créer une instance Intervention\Image\Image à partir des données de la photo
@@ -201,12 +204,13 @@ class AdminController extends Controller
         $success = true;
         return  view('home')->with('success',$success);
     }
+    
     public function searchUser(Request $request){
         $users = User::where('prenom','like', '%'.$request->term.'%')
         ->orwhere('id','=', $request->term)
         ->orwhere('email','=', $request->term)
         ->orwhere('profil','=', $request->term)
-        ->orwhere('nom','like', '%'.$request->term.'%')->get();
-        return view('user.liste')->with('users', $users);
+        ->orwhere('nom','like', '%'.$request->term.'%')->paginate(4);
+        return view('user.liste',['users' => $users, 'title'=>'Admin']);
     }
 }

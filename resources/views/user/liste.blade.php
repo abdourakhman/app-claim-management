@@ -20,10 +20,9 @@
                     <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
                         <table class="table table-responsive">
-                            <caption>LISTE DES UTILISATEURS</caption>
                             <thead>
                               <tr>
-                                <th scope="col">photo</th>
+                                <th scope="col">PHOTO</th>
                                 <th scope="col">PROFIL</th>
                                 <th scope="col">PRENOM</th>
                                 <th scope="col">NOM</th>
@@ -61,6 +60,9 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="pagination pagination-sm">
+                                {{$users->links()}}
+                        </div>
                     </form>
                 </div>
             </div>
