@@ -116,74 +116,9 @@
                                     }
                                   }
                                 });
-                              </script>
-                              
+                              </script> 
                         </div>
-                    </div>
-                    {{-- <div class="row">
-                        <div class="col-md-6">
-                            <div>
-                                <canvas id="myChart3"></canvas>
-                              </div>
-                              
-                              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                              
-                              <script>
-                                const ctx3 = document.getElementById('myChart3');
-                              
-                                new Chart(ctx3, {
-                                  type: 'line',
-                                  data: {
-                                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                                    datasets: [{
-                                      label: 'INTERVENTION AGENTS',
-                                      data: [12, 19, 3, 5, 2, 3],
-                                      borderWidth: 1
-                                    }]
-                                  },
-                                  options: {
-                                    scales: {
-                                      y: {
-                                        beginAtZero: true
-                                      }
-                                    }
-                                  }
-                                });
-                              </script>
-                              
-                        </div>
-                        <div class="col-md-6">
-                            <div>
-                                <canvas id="myChart4"></canvas>
-                              </div>
-                              
-                              <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-                              
-                              <script>
-                                const ctx4 = document.getElementById('myChart4');
-                              
-                                new Chart(ctx4, {
-                                  type: 'bar',
-                                  data: {
-                                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                                    datasets: [{
-                                      label: 'INTERVENTION AGENTS',
-                                      data: [12, 19, 3, 5, 2, 3],
-                                      borderWidth: 1
-                                    }]
-                                  },
-                                  options: {
-                                    scales: {
-                                      y: {
-                                        beginAtZero: true
-                                      }
-                                    }
-                                  }
-                                });
-                              </script>
-                              
-                        </div>
-                    </div> --}}
+                      </div>
                     </div>
                 </div>
             </section>

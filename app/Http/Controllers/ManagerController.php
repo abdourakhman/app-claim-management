@@ -14,8 +14,63 @@ use Illuminate\Support\Facades\Auth;
 class ManagerController extends Controller
 {
     public function dashboard(){
+        $interventions = DB::table('interventions')
+            ->select(DB::raw("DATE_FORMAT(created_at, '%m/%d') as moisJour"), DB::raw('COUNT(*) as nombreInterventions'))
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m/%d')"))
+            ->orderBy(DB::raw("DATE_FORMAT(created_at, '%m/%d')"))
+            ->limit(10)
+            ->get();
 
-        return view('manager.dashboard');
+        $reclamationResolues = DB::table('reclamations')
+            ->select(DB::raw('YEAR(created_at) as annee'), DB::raw('WEEK(created_at) as semaine'), DB::raw('COUNT(*) as nombreReclamationResolues'))
+            ->where('statut', 'résolue')
+            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('WEEK(created_at)'))
+            ->orderBy(DB::raw('YEAR(created_at)'), 'asc')
+            ->orderBy(DB::raw('WEEK(created_at)'), 'asc')
+            ->limit(10)
+            ->get();
+
+        $reclamationEchouees = DB::table('reclamations')
+            ->select(DB::raw('YEAR(created_at) as annee'), DB::raw('WEEK(created_at) as semaine'), DB::raw('COUNT(*) as nombreReclamationEchouees'))
+            ->where('statut', 'échouée')
+            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('WEEK(created_at)'))
+            ->orderBy(DB::raw('YEAR(created_at)'), 'asc')
+            ->orderBy(DB::raw('WEEK(created_at)'), 'asc')
+            ->limit(10)
+            ->get();
+        $reclamationAnnulees = DB::table('reclamations')
+            ->select(DB::raw('YEAR(created_at) as annee'), DB::raw('WEEK(created_at) as semaine'), DB::raw('COUNT(*) as nombreReclamationAnnulees'))
+            ->where('statut', 'annulée')
+            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('WEEK(created_at)'))
+            ->orderBy(DB::raw('YEAR(created_at)'), 'asc')
+            ->orderBy(DB::raw('WEEK(created_at)'), 'asc')
+            ->limit(10)
+            ->get();
+        $reclamations = DB::table('reclamations')
+            ->select(DB::raw('YEAR(created_at) as annee'), DB::raw('WEEK(created_at) as semaine'), DB::raw('COUNT(*) as nombreReclamations'))
+            ->groupBy(DB::raw('YEAR(created_at)'), DB::raw('WEEK(created_at)'))
+            ->orderBy(DB::raw('YEAR(created_at)'), 'asc')
+            ->orderBy(DB::raw('WEEK(created_at)'), 'asc')
+            ->limit(10)
+            ->get();
+
+        $gestionnaireId = Auth::user()->gestionnaire->id;
+        $affectations = DB::table('reclamations')
+            ->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as nombreAffectations'))
+            ->where('gestionnaire_id', $gestionnaireId)
+            ->groupBy(DB::raw('DATE(created_at)'))
+            ->limit(10)
+            ->get();
+            
+        return view('manager.dashboard', [
+            'title' => 'Dashboard',
+            'interventions' => $interventions,
+            'reclamations' => $reclamations,
+            'reclamationResolues' => $reclamationResolues,
+            'reclamationAnnulees' => $reclamationAnnulees,
+            'reclamationEchouees' => $reclamationEchouees,
+            'affectations' => $affectations,
+        ]);
     }
 
     public function getClaims(){

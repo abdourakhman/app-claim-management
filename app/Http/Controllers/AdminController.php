@@ -30,6 +30,7 @@ class AdminController extends Controller
         ->groupBy(DB::raw('months.mois_annee'))
         ->orderBy(DB::raw('months.mois_annee'))
         ->get();
+        
         return view('user.admin_dashboard',
                         ['numberCustumer'=>$numberCustumer,
                         'numberManager'=>$numberManager,
