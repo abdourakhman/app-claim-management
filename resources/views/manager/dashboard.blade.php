@@ -41,11 +41,11 @@
                                     datasets: [{
                                       label: 'EVOLUTION INTERVENTIONS PAR JOUR',
                                       data: nombreInterventions,
-                                      borderWidth: 2,
+                                      borderWidth: 3,
                                       fill: true,
-                                      pointBackgroundColor:'green',
-                                      borderColor: '#1A202C',
-                                      backgroundColor:'#dfe3ec',
+                                      pointBackgroundColor:'white',
+                                      borderColor: 'green',
+                                      backgroundColor:'#00264d',
                                       tension: 0.5
                                     }]
                                   },
@@ -92,11 +92,11 @@
                                     datasets: [{
                                       label: 'EVOLUTION RECLAMATIONS PAR SEMAINE',
                                       data: nombreReclamations,
-                                      borderWidth: 2,
+                                      borderWidth: 3,
                                       fill: true,
-                                      pointBackgroundColor:'red',
-                                      borderColor: '1A202C',
-                                      backgroundColor:'#ff6666',
+                                      pointBackgroundColor:'white',
+                                      borderColor: '#00264d',
+                                      backgroundColor:'green',
                                       tension: 0.6
                                     }]
                                   },
@@ -213,7 +213,7 @@
                                               label: 'Echouées',
                                               data: nombreReclamationEchouees,
                                               fill: true,
-                                              backgroundColor: '#ff3333',
+                                              backgroundColor: 'red',
                                               borderColor: 'rgb(255, 99, 132)',
                                               pointBackgroundColor: 'rgb(255, 99, 132)',
                                               pointBorderColor: '#fff',
@@ -223,7 +223,7 @@
                                               label: 'Réussies',
                                               data: nombreReclamationResolues,
                                               fill: true,
-                                              backgroundColor: '#33ff33',
+                                              backgroundColor: 'green',
                                               borderColor: 'rgb(54, 162, 235)',
                                               pointBackgroundColor: 'rgb(54, 162, 235)',
                                               pointBorderColor: '#fff',
@@ -233,7 +233,7 @@
                                               label: 'Annulées',
                                               data: nombreReclamationAnnulees,
                                               fill: true,
-                                              backgroundColor: '#ffff66',
+                                              backgroundColor: '#00264d',
                                               borderColor: 'rgb(54, 162, 235)',
                                               pointBackgroundColor: 'rgb(54, 162, 235)',
                                               pointBorderColor: '#fff',

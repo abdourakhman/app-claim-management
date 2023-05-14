@@ -113,6 +113,7 @@ class ManagerController extends Controller
 
         $technicien = Technicien::find($request->technicien);
         $technicien->interventions()->attach($intervention->id,['date' => date('Y-m-d')]);
+        $technicien->reclamations()->attach($reclamation->id);
         $success =true;
         return redirect()->route('home')->with('success',$success);
     }

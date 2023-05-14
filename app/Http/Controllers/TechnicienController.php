@@ -6,10 +6,43 @@ use App\Models\Fiche;
 use App\Models\Technicien;
 use App\Models\Intervention;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class TechnicienController extends Controller
 {
+    public function dashboard(){
+        $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
+        $suggestions = Fiche::where('technicien_id', $technicien->id)->where('suggestion','!=',"")->count();
+        $interventionResolue = 0;
+        $interventionEchouee = 0;
+        $interventionEnAttente = 0;
+        foreach($technicien->interventions as $intervention){
+            if($intervention->statut == 'clôturée'){
+                $interventionResolue++;
+            }
+            if($intervention->statut == 'échouée'){
+                $interventionEchouee++;
+            }
+            if($intervention->statut == 'en attente'){
+                $interventionEnAttente++;
+            }        
+        }
+        $interventions = DB::table('interventions')
+            ->select(DB::raw("DATE_FORMAT(created_at, '%m/%d') as moisJour"), DB::raw('COUNT(*) as nombreInterventions'))
+            ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m/%d')"))
+            ->orderBy(DB::raw("DATE_FORMAT(created_at, '%m/%d')"))
+            ->limit(10)
+            ->get();
+        return view('technicien.dashboard',[
+            'title' => 'Dashboard',
+            'interventions' => $interventions,
+            'suggestions' => $suggestions,
+            'interventionResolue' => $interventionResolue,
+            'interventionEchouee' => $interventionEchouee,
+            'interventionEnAttente' => $interventionEnAttente,
+        ]);
+    }
     public function getInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
         return view('technicien.interventions',['technicien'=> $technicien, 'title'=>"technicien"]);

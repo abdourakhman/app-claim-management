@@ -68,7 +68,7 @@
                     
                     <div class="row">
                         <div class="col-md-12 col-lg-12">
-                            <div class="">
+                            <div style="width: 103%;">
                                 <canvas id="myChart" ></canvas>
                             </div>
                               @php
@@ -95,12 +95,12 @@
                                     datasets: [{
                                       label: 'EVOLUTION DES ABONNES AU COURS DES DERNIERS MOIS',
                                       data: nombreClients,
-                                      borderWidth: 1,
+                                      borderWidth: 4,
                                       fill: true,
-                                      pointBackgroundColor:'red',
-                                      borderColor: '1A202C',
-                                      backgroundColor:'#dfe3ec',
-                                      tension: 0.5
+                                      pointBackgroundColor:'white',
+                                      borderColor: 'green',
+                                      backgroundColor:'#00264d',
+                                      tension: 0.4
                                     }]
                                   },
                                   options: {

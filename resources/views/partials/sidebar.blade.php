@@ -31,8 +31,8 @@
                         @elseif(Auth::user()->profil == 'gestionnaire')  
                             <a href="{{route('manager.dashboard')}}" class="nav-link">
                         @else
-                        <a href="#" class="nav-link">
-                        @endif
+                        <a href="{{route('technicien.dashboard')}}" class="nav-link">
+                            @endif
                             <i class="nav-icon fas fa-tachometer-alt"></i>
                             <p>Tableau de Bord
                                 <span class="right badge badge-danger">All</span>

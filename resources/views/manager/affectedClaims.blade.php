@@ -25,6 +25,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="timeline">
+                                @php
+                                    $id_client =0;
+                                @endphp
                                 @foreach($clients as $client) 
                                 @if ($reclamations->where('client_id',$client->id)->count() !=0 )   
                                 <div class="time-label">
@@ -49,16 +52,19 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @php
+                                        $id_client = $client->id;
+                                    @endphp
                                 @endforeach
                             @endforeach
-                            
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
             @endif
-            @if ($reclamations->where('client_id',$client->id)->count() ==0 )   
+            
+            @if ($reclamations->where('client_id', $id_client)->count() == 0)
                 <h1 class="titre mr-5 px-5">Aucune réclamation en cours de traitement !</h1>
             @endif
         </div>

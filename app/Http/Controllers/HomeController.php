@@ -28,6 +28,8 @@ class HomeController extends Controller
             return redirect()->route('admin.dashboard');
         if(Auth::user()->profil == 'gestionnaire')
             return redirect()->route('manager.dashboard');
+        if(Auth::user()->profil == 'technicien')
+            return redirect()->route('technicien.dashboard');
         return view('home');
     }
 }

@@ -60,6 +60,7 @@ Route::get('/manager/techniciens/disponible', [ManagerController::class, 'getTec
 Route::get('/manager/techniciens/indisponible', [ManagerController::class, 'getTechniciensIndisponible'])->name('manager.technicien.indisponible');
 
 //technicien
+Route::get('/technicien/dashboard', [TechnicienController::class, 'dashboard'])->name('technicien.dashboard');
 Route::get('/technicien/interventions', [TechnicienController::class, 'getInterventions'])->name('technicien.list.interventions');
 Route::get('/technicien/fiche/form/{id}', [TechnicienController::class, 'fillForm'])->name('technicien.fill.form');
 Route::get('/technicien/interventions/solved', [TechnicienController::class, 'getSolvedInterventions'])->name('technicien.interventions.solved');
