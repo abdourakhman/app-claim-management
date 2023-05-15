@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </section>
+            <div class="pagination">{{$reclamations->links()}}</div>
             @endif
             @if ($reclamations->where('client_id',$id_client)->count() == 0 )   
             <h1 class="titre mr-5 px-5">Aucune réclamation n'a été déposée !</h1>

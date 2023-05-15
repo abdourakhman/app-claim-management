@@ -80,8 +80,8 @@ class ManagerController extends Controller
         ->join('reclamations as r', 'r.client_id', '=', 'c.id')
         ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
         ->where('u.profil', '=', 'client')
-        ->whereIn('r.statut', ['en cours', 'en attente'])
-        ->get();
+        ->whereIn('r.statut', ['en cours', 'en attente','résolue','échouée'])
+        ->paginate(3);
 
         // Requête 2
         $clients = DB::table('users as u')
@@ -125,7 +125,7 @@ class ManagerController extends Controller
         ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
         ->where('u.profil', '=', 'client')
         ->where('r.statut', 'en cours')
-        ->get();
+        ->paginate(3);
 
         // Requête 2
         $clients = DB::table('users as u')
@@ -144,7 +144,7 @@ class ManagerController extends Controller
         ->select('r.id as claim_id', 'r.designation', 'r.description', 'r.created_at', 'r.statut', 'c.id as client_id')
         ->where('u.profil', '=', 'client')
         ->where('r.statut', 'en attente')
-        ->get();
+        ->paginate(3);
 
         // Requête 2
         $clients = DB::table('users as u')

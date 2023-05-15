@@ -62,6 +62,7 @@
                     </div>
                 </div>
             </section>
+            <div class="pagination">{{$reclamations->links()}}</div>
             @endif
             
             @if ($reclamations->where('client_id', $id_client)->count() == 0)
