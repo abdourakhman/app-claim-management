@@ -61,7 +61,6 @@ class ManagerController extends Controller
             ->groupBy(DB::raw('DATE(created_at)'))
             ->limit(10)
             ->get();
-            
         return view('manager.dashboard', [
             'title' => 'Dashboard',
             'interventions' => $interventions,
