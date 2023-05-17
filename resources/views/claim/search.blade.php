@@ -47,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pagination">{{$claimsDay->links()}}</div>
                 </div>
             </section>
             @endif

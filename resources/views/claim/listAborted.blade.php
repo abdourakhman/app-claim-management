@@ -14,8 +14,8 @@
             <section class="content-header mt-0">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Historique</h1>
+                        <div class="col-sm-12">
+                            <h1 class="titre"> Réclamation(s) Annulée(s)  </h1>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                                             {{$claim->description}}
                                         </div>
                                         <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">Consulter</a>
+                                            <a class="btn btn-primary btn-sm">Relancer</a>
                                         </div>
                                     </div>
                                 </div>
@@ -48,6 +48,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pagination">{{$claims->links()}}</div>
                 </div>
             </section>
             @endif

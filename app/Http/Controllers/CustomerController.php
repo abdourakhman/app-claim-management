@@ -20,7 +20,7 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->select('id','designation','description', 'date', 'created_at','statut')
                 ->where('client_id', '=', $client->id)
-                ->get();
+                ->paginate(2);
 
         $claimsDay = DB::table('reclamations')
                 ->select('date')
@@ -44,7 +44,7 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->where('client_id', '=', $client->id)
                 ->whereIn('statut', ['en cours', 'clôturée'])
-                ->get();
+                ->paginate(3);
 
         $claimsDay = DB::table('reclamations')
                 ->select('date','client_id')
@@ -122,7 +122,7 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->where('client_id', '=', $client->id)
                 ->where('statut', '=', "annulée")
-                ->get();
+                ->paginate(3);
 
         $claimsDay = DB::table('reclamations')
                 ->select('date')
@@ -157,7 +157,7 @@ class CustomerController extends Controller
         $claims = DB::table('reclamations')
                 ->select('id','designation','description', 'date', 'created_at')
                 ->where('client_id', '=', $client->id)                
-                ->orwhere('designation', $request->term)
+                ->where('designation','like', '%'.$request->term.'%')
                 ->orwhere('id','=', $request->term)
                 ->get();
 
@@ -165,9 +165,9 @@ class CustomerController extends Controller
                 ->select('date')
                 ->distinct()
                 ->where('client_id', '=', $client->id)                
-                ->orwhere('designation', $request->term)
+                ->where('designation','like', '%'.$request->term.'%')
                 ->orwhere('id','=', $request->term)
-                ->get();
+                ->paginate(1);
         $title = "reclamations";
         return view('claim.search',
                 [

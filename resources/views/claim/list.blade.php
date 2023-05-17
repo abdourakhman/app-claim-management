@@ -39,9 +39,11 @@
                                             <div class="timeline-body">
                                                 {{$claim->description}}
                                             </div>
+                                            @if ($claim->statut == 'en attente')    
                                             <div class="timeline-footer">
                                                 <a href="{{route('customer.claim.abort',$claim->id)}}" class="btn btn-danger btn-sm offset-11">Annuler</a>
                                             </div>
+                                            @endif
                                         </div>
                                     </div>
                                 @endif
@@ -50,6 +52,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pagination">{{$claims->links()}}</div>
                 </div>
             </section>
             @endif

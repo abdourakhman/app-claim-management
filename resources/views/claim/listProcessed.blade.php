@@ -14,8 +14,8 @@
             <section class="content-header mt-0">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
-                            <h1>Historique</h1>
+                        <div class="col-sm-12">
+                            <h1 class="titre"> Réclamation(s) En Cours  </h1>
                         </div>
                     </div>
                 </div>
@@ -58,6 +58,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="pagination">{{$claims->links()}}</div>
                 </div>
             </section>
             @endif

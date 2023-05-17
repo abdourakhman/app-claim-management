@@ -12,7 +12,7 @@
                    <div class="card bg-light d-flex flex-fill">
                        <div class="card-header text-muted border-bottom-0">
                         <span>{{$intervention->reclamation->designation}}  </span>
-                        <span class="badge badge-danger"> ITV{{date('Ymd')}} </span> //
+                        <span class="badge badge-danger"> ITV{{$intervention->id}}/{{date('Ymd')}}#{{$intervention->reclamation->id}}  </span> //
                         <span class="badge badge-primary px-3">
                             {{$intervention->statut}}
                         </span>
