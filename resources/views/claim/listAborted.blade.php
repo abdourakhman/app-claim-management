@@ -39,7 +39,7 @@
                                             {{$claim->description}}
                                         </div>
                                         <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">Relancer</a>
+                                            <a href="{{route('customer.claim.relaunch',$claim->id)}}" class="btn btn-primary btn-sm">Relancer</a>
                                         </div>
                                     </div>
                                 </div>

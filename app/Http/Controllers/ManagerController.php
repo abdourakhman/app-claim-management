@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 class ManagerController extends Controller
 {
     public function dashboard(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $interventions = DB::table('interventions')
             ->select(DB::raw("DATE_FORMAT(created_at, '%m/%d') as moisJour"), DB::raw('COUNT(*) as nombreInterventions'))
             ->groupBy(DB::raw("DATE_FORMAT(created_at, '%m/%d')"))
@@ -63,6 +64,7 @@ class ManagerController extends Controller
             ->get();
         return view('manager.dashboard', [
             'title' => 'Dashboard',
+            'notifications' => $notifications,
             'interventions' => $interventions,
             'reclamations' => $reclamations,
             'reclamationResolues' => $reclamationResolues,
@@ -73,6 +75,7 @@ class ManagerController extends Controller
     }
 
     public function getClaims(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         //Requête 1
         $reclamations = DB::table('clients as c')
         ->join('users as u', 'u.id', '=', 'c.user_id')
@@ -89,13 +92,14 @@ class ManagerController extends Controller
             ->where('u.profil', '=', 'client')
             ->get();
 
-        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims"]);
+        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims", 'notifications'=>$notifications]);
     } 
 
     public function getFormAffectClaim($id){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $techniciens = Technicien::where('disponibilite',1)->get();
         $claim = Reclamation::findOrFail($id);
-        return view('manager.formAffect',['claim'=>$claim,'techniciens'=>$techniciens,'title'=>"Manager|claims"]); 
+        return view('manager.formAffect',['claim'=>$claim,'techniciens'=>$techniciens,'title'=>"Manager|claims", 'notifications'=>$notifications]); 
     }
 
     public function affectClaim(Request $request){
@@ -118,6 +122,7 @@ class ManagerController extends Controller
     }
 
     public function getAffectedClaims(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $reclamations = DB::table('clients as c')
         ->join('users as u', 'u.id', '=', 'c.user_id')
         ->join('reclamations as r', 'r.client_id', '=', 'c.id')
@@ -132,11 +137,12 @@ class ManagerController extends Controller
             ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
             ->where('u.profil', '=', 'client')
             ->get();
-        return view('manager.affectedClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims"]);
+        return view('manager.affectedClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims","notifications" =>$notifications]);
 
     }
 
     public function getPendingClaims(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $reclamations = DB::table('clients as c')
         ->join('users as u', 'u.id', '=', 'c.user_id')
         ->join('reclamations as r', 'r.client_id', '=', 'c.id')
@@ -151,25 +157,29 @@ class ManagerController extends Controller
             ->select('u.prenom', 'u.nom', 'u.photo_url', 'c.id')
             ->where('u.profil', '=', 'client')
             ->get();
-        return view('manager.pendingClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims"]);
+        return view('manager.pendingClaims', ['clients' => $clients, 'reclamations' => $reclamations,'title'=>"Manager|claims", 'notifications' => $notifications]);
     }
 
     public function getListTechniciens(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $techniciens = Technicien::with('user')->where('id', '!=', 0)->get();
-        return view('manager.technicien.list',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
+        return view('manager.technicien.list',['techniciens'=> $techniciens, 'title'=>"Manager|technicien", 'notifications' => $notifications]);
     }
 
     public function getTechniciensDisponible(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $techniciens = Technicien::with('user')->where('disponibilite', '=', 1)->get();
-        return view('manager.technicien.disponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
+        return view('manager.technicien.disponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien", 'notifications'=>$notifications]);
     }
 
     public function getTechniciensIndisponible(){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         $techniciens = Technicien::with('user')->where('disponibilite', '!=', 1)->get();
-        return view('manager.technicien.indisponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien"]);
+        return view('manager.technicien.indisponible',['techniciens'=> $techniciens, 'title'=>"Manager|technicien", 'notifications'=>$notifications]);
     }
 
     public function searchClaim(Request $request){
+        $notifications = Reclamation::where('statut', 'en attente')->count();
         //Requête 1
         $reclamations = DB::table('clients as c')
         ->join('users as u', 'u.id', '=', 'c.user_id')
@@ -187,6 +197,6 @@ class ManagerController extends Controller
             ->where('u.profil', '=', 'client')
             ->get();
 
-        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims"]);
+        return view('manager.claims', ['clients' => $clients, 'reclamations' => $reclamations, 'title'=>"Manager|claims", 'notifications'=>$notifications]);
     } 
 }

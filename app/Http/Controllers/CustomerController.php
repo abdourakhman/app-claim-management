@@ -13,14 +13,15 @@ class CustomerController extends Controller
 
 
     public function getDepositClaim(){
-        $client = DB::table('clients')
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
         $claims = DB::table('reclamations')
                 ->select('id','designation','description', 'date', 'created_at','statut')
                 ->where('client_id', '=', $client->id)
-                ->paginate(2);
+                ->paginate(4);
 
         $claimsDay = DB::table('reclamations')
                 ->select('date')
@@ -32,12 +33,14 @@ class CustomerController extends Controller
                     [
                     'claims' => $claims,
                     'claimsDay' => $claimsDay,
-                    'title' => $title
+                    'title' => $title,
+                    'notifications'=>$notifications
                     ]);
     }
 
     public function getProcessedClaim(){
-        $client = DB::table('clients')
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
@@ -59,7 +62,8 @@ class CustomerController extends Controller
                     [
                     'claims' => $claims,
                     'claimsDay' => $claimsDay,
-                    'title' => $title
+                    'title' => $title,
+                    'notifications' =>$notifications
                     ]);
     }
 
@@ -98,13 +102,20 @@ class CustomerController extends Controller
     }
 
     public function createClaim(){
-        return view('claim.form');
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();
+        return view('claim.form')-with('notifications',$notifications);
     }
 
     public function saveClaim(Request $request){
+        $claim = null;
+        if($request->id){
+                $claim = Reclamation::find($request->id);
+                $claim->statut = "en attente";
+        }else{
+                $claim = new Reclamation;
+        }
         $client = Client::where('user_id',(Auth::user()->id))->first();
-        $success = false;
-        $claim = new Reclamation;
         $claim->designation = $request->designation;
         $claim->description = $request->description;
         $claim->date = $request->date;
@@ -115,7 +126,8 @@ class CustomerController extends Controller
     }
 
     public function getAbortedClaim(){
-        $client = DB::table('clients')
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
@@ -137,7 +149,8 @@ class CustomerController extends Controller
                     [
                     'claims' => $claims,
                     'claimsDay' => $claimsDay,
-                    'title' => $title
+                    'title' => $title,
+                    'notifications' => $notifications
                     ]);
     }
 
@@ -148,8 +161,16 @@ class CustomerController extends Controller
         $success = true;
         return redirect()->route('home')->with('success', $success);
     }
+    public function relaunchClaim($id){
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();
+        $claim = Reclamation::find($id);
+        return view('claim.relaunched',['title' => 'reclamations', 'claim' =>$claim , 'notifications'=>$notifications]);
+    }
 
     public function searchClaim(Request $request){
+        $client = Client::where('user_id',Auth::user()->id)->first();
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();
         $client = DB::table('clients')
         ->where('user_id', '=', Auth::user()->id)
         ->first();
@@ -173,7 +194,8 @@ class CustomerController extends Controller
                 [
                 'claims' => $claims,
                 'claimsDay' => $claimsDay,
-                'title' => $title
+                'title' => $title,
+                'notifications' => $notifications
                 ]); 
     }
 }

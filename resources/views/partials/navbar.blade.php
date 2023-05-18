@@ -49,22 +49,56 @@
             <li class="nav-item dropdown">
                 <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
                     <i class="far fa-bell"></i>
-                    <span class="badge badge-warning navbar-badge"><?= rand(0,3)?></span>
+                    <span class="badge badge-warning navbar-badge">
+                            {{$notifications ?? 0}}
+                    </span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
-                <span class="dropdown-header"><?= rand(0,3)?> Notifications</span>
+                <span class="dropdown-header">
+                    @if (Auth::user()->profil == "gestionnaire")
+                        {{$notifications ?? 0}} Réclamation(s) en attente
+                    @endif
+                    @if (Auth::user()->profil == "client")
+                        {{$notifications ?? 0}} Réclamation(s) en traitement
+                    @endif
+                    {{-- @if (Auth::user()->profil == "technicien")
+                        {{$notifications ?? 0}} Intevention(s) à traiter
+                    @endif --}}
+                    
+                </span>
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-envelope mr-2"></i> 4 new messages
-                    <span class="float-right text-muted text-sm">3 mins</span>
-                </a>
+                @if (Auth::user()->profil == "gestionnaire")
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{$notifications}} réclamation(s)
+                        @if ($notifications != 0)    
+                            <a class=" float-right text-muted text-sm" href="{{route('manager.claim.pending')}}">consulter</a>
+                        @else
+                        <a class=" float-right text-muted text-sm" href="#">Rien à consulter</a>
+                        @endif
+                    </a>                  
+                @endif
+                @if (Auth::user()->profil == "client")
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{$notifications ?? '0'}} Message(s)
+                        @if ($notifications != 0)    
+                            <a class=" float-right text-muted text-sm" href="{{route('customer.claim.processed')}}">consulter</a>
+                        @else
+                        <a class=" float-right text-muted text-sm" href="#">Rien à consulter</a>
+                        @endif
+                    </a>                  
+                @endif
+                {{-- @if (Auth::user()->profil == "technicien")
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-envelope mr-2"></i> {{$notifications}} Intervention(s)
+                        @if ($notifications != 0)    
+                            <a class=" float-right text-muted text-sm" href="{{route('technicien.list.interventions')}}">consulter</a>
+                        @else
+                        <a class=" float-right text-muted text-sm" href="#">Rien à consulter</a>
+                        @endif
+                    </a>                  
+                @endif --}}
                 <div class="dropdown-divider"></div>
-                <a href="#" class="dropdown-item">
-                    <i class="fas fa-list mr-2"></i>11 interventions
-                    <span class="float-right text-muted text-sm">3 jours</span>
-                </a>
-                <div class="dropdown-divider"></div>
-                </div>
+            </div>
             </li>   
 
             <li class="nav-item">

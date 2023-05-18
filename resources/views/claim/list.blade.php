@@ -30,7 +30,7 @@
                                     <span class="bg-red">{{$claimDay->date}}</span>
                                 </div>
                                 @foreach ($claims as $claim)
-                                @if (property_exists($claim, 'id'))
+                                @if ($claim->date == $claimDay->date)
                                     <div>
                                         <i class="fas fa-envelope bg-blue"></i>
                                         <div class="timeline-item">

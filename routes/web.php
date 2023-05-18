@@ -39,6 +39,7 @@ Route::get('/customer/search', [CustomerController::class, 'searchClaim'])->name
 Route::get('/customer/claims', [CustomerController::class, 'getDepositClaim'])->name('customer.claim.deposit');
 Route::get('/customer/claims/processed', [CustomerController::class, 'getProcessedClaim'])->name('customer.claim.processed');
 Route::get('/customer/claims/aborted', [CustomerController::class, 'getAbortedClaim'])->name('customer.claim.aborted');
+Route::get('/customer/relaunch/claim/{id}', [CustomerController::class, 'relaunchClaim'])->name('customer.claim.relaunch')->where('id', '[0-9]+');
 Route::get('/customer/claims/aborted/{id}', [CustomerController::class, 'abortClaim'])->name('customer.claim.abort')->where('id', '[0-9]+');
 Route::get('/customer/newClaim', [CustomerController::class, 'createClaim'])->name('customer.claim.create');
 Route::get('/customer/interventions/resolved/{id}', [CustomerController::class, 'getResolvedInterventions'])->name('customer.interventions.resolved')->where('id', '[0-9]+');

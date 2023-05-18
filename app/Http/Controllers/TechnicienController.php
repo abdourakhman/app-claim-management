@@ -11,6 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class TechnicienController extends Controller
 {
+    private function getNotifications(){
+        $techniciens = Technicien::with('interventions')->get();
+        $notifications = 0;
+        foreach($techniciens as $technicien){
+            if($technicien->user_id == Auth::user()->id){
+                foreach($technicien->interventions as $intervention){
+                    if($intervention->statut == 'en attente')
+                        $notifications++;
+                }
+            }
+        }
+        return $notifications;
+    }
     public function dashboard(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
         $suggestions = Fiche::where('technicien_id', $technicien->id)->where('suggestion','!=',"")->count();
@@ -37,6 +50,7 @@ class TechnicienController extends Controller
         return view('technicien.dashboard',[
             'title' => 'Dashboard',
             'interventions' => $interventions,
+            'notifications' => $this->getNotifications(),
             'suggestions' => $suggestions,
             'interventionResolue' => $interventionResolue,
             'interventionEchouee' => $interventionEchouee,
@@ -45,7 +59,7 @@ class TechnicienController extends Controller
     }
     public function getInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.interventions',['technicien'=> $technicien, 'title'=>"technicien"]);
+        return view('technicien.interventions',['technicien'=> $technicien, 'title'=>"technicien", 'notifications'=>$this->getNotifications()]);
     }
 
     public function solveClaim($id){
@@ -63,17 +77,17 @@ class TechnicienController extends Controller
 
     public function getSolvedInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.solved',['technicien'=> $technicien, 'title'=>"technicien"]);
+        return view('technicien.solved',['technicien'=> $technicien, 'title'=>"technicien",'notifications'=>$this->getNotifications()]);
     }
 
     public function getPendingInterventions(){
         $technicien = Technicien::with('interventions')->where('user_id',Auth::user()->id)->first();
-        return view('technicien.notSolved',['technicien'=> $technicien, 'title'=>"technicien"]);
+        return view('technicien.notSolved',['technicien'=> $technicien, 'title'=>"technicien",'notifications'=>$this->getNotifications()]);
     }
     
     public function fillForm($id){
         $intervention = Intervention::with('reclamation')->where('id',$id)->first();
-        return view('technicien.fillForm',['intervention' => $intervention, 'title'=>"technicien"]);
+        return view('technicien.fillForm',['intervention' => $intervention, 'title'=>"technicien",'notifications'=>$this->getNotifications()]);
     }
 
     public function saveForm(Request $request){

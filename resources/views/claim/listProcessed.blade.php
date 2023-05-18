@@ -43,12 +43,7 @@
                                         <div class="timeline-footer">
                                             <a  href="{{route('customer.interventions.resolved',$claim->id)}}" class="btn btn-success btn-sm">intervention réussie <i class="fas fa-thumbs-up"></i></a>
                                             <a  href="{{route('customer.interventions.failed',$claim->id)}}"  class="btn btn-danger btn-sm float-right">intervention échouée <i class="fas fa-thumbs-down"></i></a>
-                                        </div>
-                                       
-                                        @else
-                                        <div class="timeline-footer">
-                                            <a class="btn btn-primary btn-sm">consulter</a>
-                                        </div>
+                                        </div>                                        
                                         @endif
                                     </div>
                                 </div>
