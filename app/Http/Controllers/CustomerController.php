@@ -106,7 +106,7 @@ class CustomerController extends Controller
     public function createClaim(){
         $client = Client::where('user_id',Auth::user()->id)->first();
         $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();
-        return view('claim.form')-with('notifications',$notifications);
+        return view('claim.form')->with('notifications',$notifications);
     }
 
     public function saveClaim(Request $request){
