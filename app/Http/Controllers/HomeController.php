@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
+use App\Models\Reclamation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,6 +32,10 @@ class HomeController extends Controller
             return redirect()->route('manager.dashboard');
         if(Auth::user()->profil == 'technicien')
             return redirect()->route('technicien.dashboard');
-        return view('home');
+        if(Auth::user()->profil == 'client'){
+            $client = Client::where('user_id',Auth::user()->id)->first();
+            $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        
+            return view('home')->with('notifications',$notifications);
+        }
     }
 }

@@ -61,9 +61,9 @@
                     @if (Auth::user()->profil == "client")
                         {{$notifications ?? 0}} Réclamation(s) en traitement
                     @endif
-                    {{-- @if (Auth::user()->profil == "technicien")
+                    @if (Auth::user()->profil == "technicien")
                         {{$notifications ?? 0}} Intevention(s) à traiter
-                    @endif --}}
+                    @endif 
                     
                 </span>
                 <div class="dropdown-divider"></div>
@@ -79,15 +79,15 @@
                 @endif
                 @if (Auth::user()->profil == "client")
                     <a href="#" class="dropdown-item">
-                        <i class="fas fa-envelope mr-2"></i> {{$notifications ?? '0'}} Message(s)
-                        @if ($notifications != 0)    
+                        <i class="fas fa-envelope mr-2"></i> {{$notifications ?? 0}} Message(s)
+                        @if($notifications?? 0 != 0)    
                             <a class=" float-right text-muted text-sm" href="{{route('customer.claim.processed')}}">consulter</a>
                         @else
                         <a class=" float-right text-muted text-sm" href="#">Rien à consulter</a>
                         @endif
                     </a>                  
                 @endif
-                {{-- @if (Auth::user()->profil == "technicien")
+                @if (Auth::user()->profil == "technicien")
                     <a href="#" class="dropdown-item">
                         <i class="fas fa-envelope mr-2"></i> {{$notifications}} Intervention(s)
                         @if ($notifications != 0)    
@@ -96,7 +96,7 @@
                         <a class=" float-right text-muted text-sm" href="#">Rien à consulter</a>
                         @endif
                     </a>                  
-                @endif --}}
+                @endif
                 <div class="dropdown-divider"></div>
             </div>
             </li>   

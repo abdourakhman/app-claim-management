@@ -14,7 +14,8 @@ class CustomerController extends Controller
 
     public function getDepositClaim(){
         $client = Client::where('user_id',Auth::user()->id)->first();
-        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        
+        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
@@ -40,7 +41,8 @@ class CustomerController extends Controller
 
     public function getProcessedClaim(){
         $client = Client::where('user_id',Auth::user()->id)->first();
-        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        
+        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
@@ -127,7 +129,8 @@ class CustomerController extends Controller
 
     public function getAbortedClaim(){
         $client = Client::where('user_id',Auth::user()->id)->first();
-        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        $client = DB::table('clients')
+        $notifications = Reclamation::where('statut', 'en cours')->where('client_id',$client->id)->count();        
+        $client = DB::table('clients')
                 ->where('user_id', '=', Auth::user()->id)
                 ->first();
 
