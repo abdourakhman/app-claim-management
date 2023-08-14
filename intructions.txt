@@ -1,0 +1,5 @@
+after clonning the project,
+do "composer install"
+create a new .env file and specify the right config for your database
+then "php artisan generate:key"
+and "php artisan serve"
